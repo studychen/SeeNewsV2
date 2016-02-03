@@ -7,11 +7,11 @@
 - 抽屉菜单
 - 夜间模式 定义不同style 
 
-## 依赖的开源类库
-
+## 依赖的开源类库、工具
 
  - [butterknife](https://github.com/JakeWharton/butterknife)
  - [fresco](https://github.com/facebook/fresco)
+ - [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
 
 
 ## 借鉴的 APP
