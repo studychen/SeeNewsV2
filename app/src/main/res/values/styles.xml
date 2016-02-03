@@ -1,0 +1,75 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="stateSelector">@color/state_selector_light</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="accentColor">@color/accent</item>
+        <item name="iconColor">@color/primary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="windowBackground">@color/window_background</item>
+        <item name="fabCircleColor">@color/fabCircleColor_light</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
+    </style>
+
+
+    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <!--兼容Api 21之前的版本 -->
+        <item name="overlapAnchor">false</item>
+    </style>
+
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>
+        <item name="colorAccent">@color/colorAccentDarkTheme</item>
+        <item name="stateSelector">@color/state_selector_dark</item>
+        <item name="android:windowBackground">@color/window_background_dark</item>
+        <item name="accentColor">@color/colorAccentDarkTheme</item>
+        <item name="iconColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="windowBackground">@color/window_background_dark</item>
+        <item name="fabCircleColor">@color/fabCircleColor_dark</item>
+    </style>
+
+    <!--主页tabs样式-->
+    <style name="main_bottom_tab">
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">0.0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/main_bottom_tab_font_size</item>
+        <item name="android:textColor">@color/main_bottom_tab_textcolor</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:paddingTop">@dimen/main_bottom_tab_padding_top</item>
+    </style>
+
+    <!--设置 toolbar 弹出的OptionMenu 背景颜色和字体颜色-->
+    <style name="MyOptionMenuStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/window_background</item>
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTabText</item>
+        <item name="tabSelectedTextColor">@color/primary_text</item>
+    </style>
+
+    <style name="MyCustomTabText" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/icons</item>
+    </style>
+
+    <style name="CollapsingToolbarTitleStyle.GsonView" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+</resources>

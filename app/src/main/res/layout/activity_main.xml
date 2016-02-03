@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?><!--抽屉-->
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:background="?attr/windowBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--主页面-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--toolbar-->
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="@style/MyOptionMenuStyle"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.AppBarLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+            <include layout="@layout/widget_floating_action_button" />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/lightslategray" />
+
+        <RadioGroup
+            android:id="@+id/main_radios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/main_bottom_tabs_padding_bottom">
+
+            <RadioButton
+                android:id="@+id/rb_tab_common"
+                style="@style/main_bottom_tab"
+                android:checked="false"
+                android:drawableTop="@drawable/tab_first_selector"
+                android:text="@string/main_tab_first" />
+
+            <RadioButton
+                android:id="@+id/rb_tab_sale"
+                style="@style/main_bottom_tab"
+                android:drawableTop="@drawable/tab_second_selector"
+                android:text="@string/main_tab_second" />
+
+            <RadioButton
+                android:id="@+id/rb_tab_visit"
+                style="@style/main_bottom_tab"
+                android:drawableTop="@drawable/tab_third_selector"
+                android:text="@string/main_tab_third" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <!--导航页-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:itemTextColor="?attr/stateSelector"
+        app:menu="@menu/drawer_view"
+        app:itemIconTint="?attr/stateSelector"/>
+
+</android.support.v4.widget.DrawerLayout>
+

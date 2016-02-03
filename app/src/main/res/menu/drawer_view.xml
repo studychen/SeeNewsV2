@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/drawer_action_share"
+            android:title="消息中心" />
+        <item
+            android:id="@+id/nav_collection"
+            android:icon="@drawable/drawer_action_collection"
+            android:title="我的收藏" />
+        <item
+            android:id="@+id/nav_read"
+            android:icon="@drawable/drawer_action_read"
+            android:title="浏览历史" />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_us"
+            android:title="关于我们" />
+        <item
+            android:id="@+id/nav_share"
+            android:title="分享" />
+        <item
+            android:id="@+id/nav_setting"
+            android:title="夜间模式" />
+    </group>
+</menu>

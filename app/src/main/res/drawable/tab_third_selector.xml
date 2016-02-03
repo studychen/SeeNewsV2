@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--底部按钮选中与未选中的状态-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/tab_third_normal" android:state_checked="false"/>
+    <item android:drawable="@drawable/tab_third_checked" android:state_checked="true"/>
+</selector>

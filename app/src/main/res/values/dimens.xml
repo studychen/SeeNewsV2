@@ -1,0 +1,31 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--主页tab-->
+    <dimen name="main_bottom_tabs_padding_bottom">7dp</dimen>
+    <dimen name="main_bottom_tab_padding_top">5dp</dimen>
+    <dimen name="main_bottom_tab_font_size">16sp</dimen>
+    <dimen name="main_bottom_tab_drawable_padding">2dp</dimen>
+
+
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
+    <dimen name="margin_56dp">56dp</dimen>
+
+    <dimen name="appbar_collaspe_height">256dp</dimen>
+
+    <!--解决各 API 版本间距不统一-->
+    <dimen name="fab_margin_right">0dp</dimen>
+    <dimen name="fab_margin_bottom">0dp</dimen>
+</resources>

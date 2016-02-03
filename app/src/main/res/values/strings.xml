@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">电院新闻</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!--tabs-->
+    <string name="menu_feedback">用户反馈</string>
+    <string name="menu_refresh">刷新</string>
+    <string name="menu_mode">切换模式</string>
+
+    <!--tabs 简便用 first second third-->
+    <string name="main_tab_first">新闻</string>
+    <string name="main_tab_second">阅读</string>
+    <string name="main_tab_third">我</string>
+
+    <!--侧滑导航-->
+    <string name="exit_account_hint">你确定要退出吗?</string>
+    <string name="exit_app_title">电院新闻</string>
+    <string name="exit_app_hint">你确定要退出吗?</string>
+    <string name="exit_app_positive">是的!</string>
+    <string name="exit_app_negative">还不想退出!</string>
+
+    <!--首页ActionBarDrawerToggle-->
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
+    <!--首页搜索框-->
+    <string name="action_search_title">选择搜索内容</string>
+    <string-array name="search_content_main">
+        <item>标题</item>
+        <item>日期</item>
+    </string-array>
+    <string name="search_positive_btn_main">OK</string>
+</resources>
