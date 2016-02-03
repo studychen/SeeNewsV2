@@ -7,6 +7,7 @@
 ### V 0.3
 - 增加启动图标
 - TabLayout + ViewPager 页卡滑动效果，展示本科、研究生等栏目的新闻
+- 修复部分设备 optionsMenu遮挡ToolBar的问题
  
 - 
 ### V 0.2
