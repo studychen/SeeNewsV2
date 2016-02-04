@@ -5,9 +5,9 @@
     <color name="black">#000000</color>
 
     <!--亮蓝灰 -->
-    <color name="slategray">#708090</color>
+    <color name="slategray">#B2B2B2</color>
     <!--青绿色 -->
-    <color name="mediumseagreen">#3cb371</color>
+    <color name="mediumseagreen">#03A9F4</color>
 
     <!--古董白 -->
     <color name="salmon">#fa8072</color>
@@ -21,16 +21,15 @@
 
     <color name="primary">#E91E63</color>
     <color name="primary_dark">#C2185B</color>
-    <color name="accent">#FF4081</color>
+    <color name="accent">#03A9F4</color>
     <color name="fabCircleColor_light">#f50057</color>
     <color name="primary_text">#212121</color>
     <color name="icons">#FFFFFF</color>
 
     <color name="colorPrimaryDarkTheme">#525065</color>
     <color name="colorPrimaryDarkDarkTheme">#4a4959</color>
-    <color name="colorAccentDarkTheme">#03A9F4</color>
+    <color name="colorAccentDarkTheme">#E91E63</color>
     <color name="fabCircleColor_dark">#0288D1</color>
-
     <color name="window_background">#FFF5F5F5</color>
     <color name="window_background_dark">#403f4d</color>
 

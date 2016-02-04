@@ -65,7 +65,7 @@ public class ArticleNewsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_article, null);
+        View view = inflater.inflate(R.layout.frag_article, null);
         Log.i(STORE_PARAM, "in StoreFragment");
         mAct = getActivity();
         ButterKnife.inject(this, view);

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.studychen.seenews.util.PrefUtils;
 import com.studychen.seenews.util.ThemeTool;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // 激活导航栏设置
         tintManager.setNavigationBarTintEnabled(true);
         // 设置一个颜色给系统栏
-        if (ThemeTool.isDark) {
+        if (PrefUtils.isDarkMode()) {
             tintManager.setTintColor(getResources().getColor(R.color.colorPrimaryDarkDarkTheme));
         } else {
             tintManager.setTintColor(getResources().getColor(R.color.primary_dark));

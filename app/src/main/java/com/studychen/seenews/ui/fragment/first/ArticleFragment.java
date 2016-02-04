@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 
 import com.studychen.seenews.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +26,14 @@ import butterknife.InjectView;
  */
 public class ArticleFragment extends Fragment {
     private static final String SALE_PARAM = "param";
-    @InjectView(R.id.tablayout_fragment_article)
-    TabLayout tablayout;//Tablayout
-    @InjectView(R.id.vp_fragment_article)
-    ViewPager vp;//ViewPager
-
-    private String mParam;
-
-    private Activity mAct;//托管的Activity
     private final static String LATEST = "最新";
     private final static String MASTER = "研究生";
+    @InjectView(R.id.tablayout_article)
+    TabLayout tablayout;//Tablayout
+    @InjectView(R.id.viewpager_article)
+    ViewPager vp;//ViewPager
+    private String mParam;
+    private Activity mAct;//托管的Activity
     private List<Fragment> fragments = new ArrayList<Fragment>();//放置Fragmetn
     private String[] titles = new String[]{LATEST, MASTER};//
 
@@ -58,7 +57,7 @@ public class ArticleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_one, null);
+        View view = inflater.inflate(R.layout.frag_first_container, null);
         mAct = getActivity();
         //注入
         ButterKnife.inject(this, view);
@@ -69,18 +68,18 @@ public class ArticleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //初始化Tablayout
-        setTablayout();
+//        setTablayout();
         //初始化ViewPager
         setViewPager();
     }
 
-    /**
-     * 设置Tablayout
-     */
-    private void setTablayout() {
-        tablayout.addTab(tablayout.newTab().setText(LATEST), true);
-        tablayout.addTab(tablayout.newTab().setText(MASTER));
-    }
+//    /**
+//     * 设置Tablayout
+//     */
+//    private void setTablayout() {
+//        tablayout.addTab(tablayout.newTab().setText(LATEST), true);
+//        tablayout.addTab(tablayout.newTab().setText(MASTER));
+//    }
 
     /**
      * 设置ViewPager
@@ -88,9 +87,9 @@ public class ArticleFragment extends Fragment {
     private void setViewPager() {
         //添加数据
         fragments.add(LatestArticleFragment.newInstance(""));
-        fragments.add(MasterArticleFragment.newInstance(""));
+        fragments.add(OriginalArticleFragment.newInstance(""));
         //设置适配器
-        FragmentSaleAdapter adapter = new FragmentSaleAdapter(getChildFragmentManager());
+        ArticleFragmentAdapter adapter = new ArticleFragmentAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
         //绑定tab
         tablayout.setupWithViewPager(vp);
@@ -98,11 +97,33 @@ public class ArticleFragment extends Fragment {
     }
 
     /**
+     * Fragment切换时隐藏控件
+     *
+     * @param menuVisible
+     */
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        if (this.getView() != null) {
+            this.getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    /**
+     * 处理类库ButterKnife
+     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    /**
      * 适配器
      */
-    class FragmentSaleAdapter extends FragmentStatePagerAdapter {
+    class ArticleFragmentAdapter extends FragmentStatePagerAdapter {
 
-        public FragmentSaleAdapter(FragmentManager fm) {
+        public ArticleFragmentAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -120,29 +141,6 @@ public class ArticleFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return titles[position];
         }
-    }
-
-    /**
-     * Fragment切换时隐藏控件
-     *
-     * @param menuVisible
-     */
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        if (this.getView() != null) {
-            this.getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    /**
-     * 重置注入
-     */
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        //重置ButterKnife
-        ButterKnife.reset(this);
     }
 
 }

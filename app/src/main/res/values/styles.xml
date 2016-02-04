@@ -22,7 +22,7 @@
         <item name="overlapAnchor">false</item>
     </style>
 
-
+    <!--夜间模式 部分属性影响很多空间空间设置-->
     <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>
@@ -34,6 +34,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="windowBackground">@color/window_background_dark</item>
         <item name="fabCircleColor">@color/fabCircleColor_dark</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>
 
     <!--主页tabs样式-->

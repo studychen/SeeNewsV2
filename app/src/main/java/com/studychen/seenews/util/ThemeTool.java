@@ -10,10 +10,9 @@ import com.studychen.seenews.R;
  */
 public class ThemeTool {
 
-    public static boolean isDark = false;
 
     public static void changeTheme(Activity activity) {
-        if (isDark) {
+        if (PrefUtils.isDarkMode()) {
             activity.setTheme(R.style.AppThemeDark);
         }
     }

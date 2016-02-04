@@ -16,7 +16,7 @@ public class SeeNewsApp extends Application {
 
     private static Context mContext;
 
-    public static Context getmContext() {
+    public static Context getContext() {
         return mContext;
     }
 

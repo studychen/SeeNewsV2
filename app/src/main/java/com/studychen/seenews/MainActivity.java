@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studychen.seenews.util.NightModeHelper;
+import com.studychen.seenews.util.PrefUtils;
 import com.studychen.seenews.util.ThemeTool;
 import com.studychen.seenews.ui.fragment.first.ArticleFragment;
 import com.studychen.seenews.ui.fragment.second.TestNightFragment;
@@ -157,7 +158,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 showSingeChoiceDialog();
                 return true;
             case R.id.men_action_change_mode:
-                ThemeTool.isDark = !ThemeTool.isDark;
+                PrefUtils.setDarkMode(!PrefUtils.isDarkMode());
                 MainActivity.this.recreate();//重新创建当前Activity实例
                 Toast.makeText(this, "yenight", Toast.LENGTH_LONG).show();
                 return true;
@@ -170,9 +171,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * 搜索跳转
      */
     private void showSingeChoiceDialog() {
+        int colorId = R.color.accent;
+        if (PrefUtils.isDarkMode()) {
+            colorId = R.color.colorAccentDarkTheme;
+        }
+        
         new MaterialDialog.Builder(this).title(R.string.action_search_title)
                 .items(R.array.search_content_main)
-                .itemColorRes(R.color.accent)
+                .itemColorRes(colorId)
                 .itemsCallbackSingleChoice(0, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which,
@@ -191,7 +197,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onBackPressed() {
         new MaterialDialog.Builder(this).iconRes(
-                R.drawable.ic_launcher).limitIconToDefaultSize() // limits the displayed icon size to 48dp
+                R.mipmap.ic_launcher).limitIconToDefaultSize() // limits the displayed icon size to 48dp
                 .title(R.string.exit_app_title)
                 .content(R.string.exit_app_hint)
                 .positiveText(R.string.exit_app_positive)
