@@ -30,7 +30,15 @@ import butterknife.InjectView;
 /**
  * Created by tomchen on 1/10/16.
  */
-public class MasterArticleFragment extends Fragment {
+public class OriginalFragment extends Fragment {
+
+    public static final int LATEST = 0;// 最新消息
+    public static final int NOTIFIC = 1;// 校园通知
+    public static final int BACHELOR = 2;// 本科教学 学士
+    public static final int MASTER = 3;// 研究生 硕士
+    public static final int ACADEMIC = 5;// 学术交流
+    // 选取了电院新闻的部分栏目
+    public static final int JOB = 8;// 就业招聘
 
     private static final String ARTICLE_LATEST_PARAM = "param";
 
@@ -76,8 +84,8 @@ public class MasterArticleFragment extends Fragment {
         }
     };
 
-    public static MasterArticleFragment newInstance(String param) {
-        MasterArticleFragment fragment = new MasterArticleFragment();
+    public static OriginalFragment newInstance(String param) {
+        OriginalFragment fragment = new OriginalFragment();
         Bundle args = new Bundle();
         args.putString(ARTICLE_LATEST_PARAM, param);
         fragment.setArguments(args);
@@ -96,7 +104,7 @@ public class MasterArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_one_master, container, false);
+        View view = inflater.inflate(R.layout.frag_first_original, container, false);
         mAct = getActivity();
         ButterKnife.inject(this, view);
         return view;
@@ -144,61 +152,61 @@ public class MasterArticleFragment extends Fragment {
 
         vpHottest.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-              //图片左右滑动时候，将当前页的圆点图片设为选中状态
-              @Override
-              public void onPageSelected(int position) {
-                  // 一定几个图片，几个圆点，但注意是从0开始的
-                  int total = mBottomImages.length;
-                  for (int j = 0; j < total; j++) {
-                      if (j == position) {
-                          mBottomImages[j].setBackgroundResource(R.drawable.indicator_select);
-                      } else {
-                          mBottomImages[j].setBackgroundResource(R.drawable.indicator_not_select);
-                      }
-                  }
+                                              //图片左右滑动时候，将当前页的圆点图片设为选中状态
+                                              @Override
+                                              public void onPageSelected(int position) {
+                                                  // 一定几个图片，几个圆点，但注意是从0开始的
+                                                  int total = mBottomImages.length;
+                                                  for (int j = 0; j < total; j++) {
+                                                      if (j == position) {
+                                                          mBottomImages[j].setBackgroundResource(R.drawable.indicator_select);
+                                                      } else {
+                                                          mBottomImages[j].setBackgroundResource(R.drawable.indicator_not_select);
+                                                      }
+                                                  }
 
-                  //设置全局变量，currentIndex为选中图标的 index
-                  autoCurrIndex = position;
-              }
+                                                  //设置全局变量，currentIndex为选中图标的 index
+                                                  autoCurrIndex = position;
+                                              }
 
-              @Override
-              public void onPageScrolled(int i, float v, int i1) {
-              }
+                                              @Override
+                                              public void onPageScrolled(int i, float v, int i1) {
+                                              }
 
-              @Override
-              public void onPageScrollStateChanged(int state) {
-                  //实现切换到末尾后返回到第一张
-                  switch (state) {
-                      // 手势滑动
-                      case ViewPager.SCROLL_STATE_DRAGGING:
-                          break;
+                                              @Override
+                                              public void onPageScrollStateChanged(int state) {
+                                                  //实现切换到末尾后返回到第一张
+                                                  switch (state) {
+                                                      // 手势滑动
+                                                      case ViewPager.SCROLL_STATE_DRAGGING:
+                                                          break;
 
-                      // 界面切换中
-                      case ViewPager.SCROLL_STATE_SETTLING:
-                          Log.i(log, "in SCROLL_STATE_SETTLING " + vpHottest.getCurrentItem());
-                          break;
+                                                      // 界面切换中
+                                                      case ViewPager.SCROLL_STATE_SETTLING:
+                                                          Log.i(log, "in SCROLL_STATE_SETTLING " + vpHottest.getCurrentItem());
+                                                          break;
 
-                      case ViewPager.SCROLL_STATE_IDLE:// 滑动结束，即切换完毕或者加载完毕
-                          Log.i(log, "in SCROLL_STATE_IDLE " + vpHottest.getCurrentItem());
-                          // 当前为最后一张，此时从右向左滑，则切换到第一张
-                          if (vpHottest.getCurrentItem() == vpHottest.getAdapter()
-                                  .getCount() - 1) {
-                              vpHottest.setCurrentItem(0, false);
-                          }
-                          // 当前为第一张，此时从左向右滑，则切换到最后一张
-                          else if (vpHottest.getCurrentItem() == 0) {
-                              vpHottest.setCurrentItem(vpHottest.getAdapter()
-                                      .getCount() - 1, false);
-                          }
-                          break;
+                                                      case ViewPager.SCROLL_STATE_IDLE:// 滑动结束，即切换完毕或者加载完毕
+                                                          Log.i(log, "in SCROLL_STATE_IDLE " + vpHottest.getCurrentItem());
+                                                          // 当前为最后一张，此时从右向左滑，则切换到第一张
+                                                          if (vpHottest.getCurrentItem() == vpHottest.getAdapter()
+                                                                  .getCount() - 1) {
+                                                              vpHottest.setCurrentItem(0, false);
+                                                          }
+                                                          // 当前为第一张，此时从左向右滑，则切换到最后一张
+                                                          else if (vpHottest.getCurrentItem() == 0) {
+                                                              vpHottest.setCurrentItem(vpHottest.getAdapter()
+                                                                      .getCount() - 1, false);
+                                                          }
+                                                          break;
 
-                      default:
-                          Log.i(log, "in default");
-                          break;
-                  }
+                                                      default:
+                                                          Log.i(log, "in default");
+                                                          break;
+                                                  }
 
-              }
-          }
+                                              }
+                                          }
         );
 
 
@@ -215,7 +223,7 @@ public class MasterArticleFragment extends Fragment {
 //                mHandler.sendMessage(message);
 //            }
 //        }, 2000, 2000);
-        
+
     }
 
 

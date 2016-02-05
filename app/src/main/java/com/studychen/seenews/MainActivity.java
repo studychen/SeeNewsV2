@@ -20,8 +20,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.studychen.seenews.util.NightModeHelper;
 import com.studychen.seenews.util.PrefUtils;
-import com.studychen.seenews.util.ThemeTool;
-import com.studychen.seenews.ui.fragment.first.ArticleFragment;
+import com.studychen.seenews.ui.fragment.first.ArticleFragmentContainer;
 import com.studychen.seenews.ui.fragment.second.TestNightFragment;
 import com.studychen.seenews.ui.fragment.store.ArticleNewsFragment;
 
@@ -63,7 +62,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         @Override
         public Fragment getItem(int position) {
             if (position == R.id.rb_tab_common) {
-                return ArticleFragment.newInstance("FirstFragment");
+                return ArticleFragmentContainer.newInstance("FirstFragment");
             } else if (position == R.id.rb_tab_sale) {
                 return TestNightFragment.newInstance("SecondFragment");
             } else {

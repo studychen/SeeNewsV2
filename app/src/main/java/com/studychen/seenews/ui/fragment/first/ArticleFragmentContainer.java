@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 
 import com.studychen.seenews.R;
+import com.studychen.seenews.util.ColumnName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +25,22 @@ import butterknife.InjectView;
 /**
  * Created by zjq on 2015/6/30.
  */
-public class ArticleFragment extends Fragment {
+public class ArticleFragmentContainer extends Fragment {
     private static final String SALE_PARAM = "param";
-    private final static String LATEST = "最新";
-    private final static String MASTER = "研究生";
+
     @InjectView(R.id.tablayout_article)
     TabLayout tablayout;//Tablayout
     @InjectView(R.id.viewpager_article)
     ViewPager vp;//ViewPager
     private String mParam;
     private Activity mAct;//托管的Activity
-    private List<Fragment> fragments = new ArrayList<Fragment>();//放置Fragmetn
-    private String[] titles = new String[]{LATEST, MASTER};//
+    private List<Fragment> mFragments = new ArrayList<Fragment>();//放置Fragmetn
+    private String[] mTitles = new String[]{ColumnName.LATEST, ColumnName.NOTIFIC,
+            ColumnName.BACHELOR, ColumnName.MASTER,
+            ColumnName.ACADEMIC, ColumnName.JOB};//
 
-    public static ArticleFragment newInstance(String param) {
-        ArticleFragment fragment = new ArticleFragment();
+    public static ArticleFragmentContainer newInstance(String param) {
+        ArticleFragmentContainer fragment = new ArticleFragmentContainer();
         Bundle args = new Bundle();
         args.putString(SALE_PARAM, param);
         fragment.setArguments(args);
@@ -86,8 +88,8 @@ public class ArticleFragment extends Fragment {
      */
     private void setViewPager() {
         //添加数据
-        fragments.add(LatestArticleFragment.newInstance(""));
-        fragments.add(OriginalArticleFragment.newInstance(""));
+        mFragments.add(LatestArticleFragment.newInstance(""));
+        mFragments.add(OriginalArticleFragment.newInstance(""));
         //设置适配器
         ArticleFragmentAdapter adapter = new ArticleFragmentAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
@@ -129,17 +131,28 @@ public class ArticleFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return fragments.get(position);
+            //首页和其他页不同
+            if (position == 0) {
+                return mFragments.get(0);
+            } else {
+                return OriginalArticleFragment.newInstance(position + "");
+            }
         }
 
         @Override
         public int getCount() {
-            return fragments.size();
+            return 6;
         }
 
+        /**
+         * 标签卡上方的标题
+         *
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
-            return titles[position];
+            return mTitles[position];
         }
     }
 
