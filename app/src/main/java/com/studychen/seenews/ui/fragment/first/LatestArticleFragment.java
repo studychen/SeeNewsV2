@@ -7,15 +7,28 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.studychen.seenews.R;
 import com.studychen.seenews.adapter.ArticleAdapter;
 import com.studychen.seenews.model.ItemArticle;
+import com.studychen.seenews.model.RotationItem;
+import com.studychen.seenews.model.SimpleArticleItem;
+import com.studychen.seenews.util.ApiUrl;
+import com.studychen.seenews.util.Constant;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -54,7 +67,7 @@ public class LatestArticleFragment extends Fragment {
     private Activity mAct;
 
     //新闻列表数据
-    private List<ItemArticle> itemArticleList = new ArrayList<ItemArticle>();
+    private List<SimpleArticleItem> itemArticleList = new ArrayList<SimpleArticleItem>();
 
     //设置当前 第几个图片 被选中
     private int currentIndex = 0;
@@ -117,6 +130,45 @@ public class LatestArticleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+
+    public List<SimpleArticleItem> getRotationItem() {
+        String url = ApiUrl.rotationUrl();
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request
+                = new Request.Builder()
+                .url(url)
+                .build();
+
+        try {
+            Response responses = client.newCall(request).execute();
+            String jsonData = responses.body().string();
+            Log.i(Constant.LOG, jsonData);
+
+
+            // 新浪云网站故障，资源耗尽
+            if (jsonData.contains(Constant.SINA_ERROR_INFO)) {
+                return null;
+            } else {
+                Gson gson = new GsonBuilder().create();
+
+                Log.i(Constant.LOG, jsonData);
+
+                Type listType = new TypeToken<List<SimpleArticleItem>>() {
+                }.getType();
+                List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
+                Log.i(Constant.LOG, articles + "");
+                return articles;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<SimpleArticleItem>();
+
     }
 
 
@@ -251,8 +303,54 @@ public class LatestArticleFragment extends Fragment {
 //        }
 //    }
 
+    /**
+     * @param type   第几个栏目
+     * @param offset 偏移 id
+     * @return
+     */
+    public List<SimpleArticleItem> getArticleList(int type, int offset) {
+        String api = ApiUrl.columnUrl();
+        String url = String.format(api, type, offset);
+        Log.i(Constant.LOG, url);
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request
+                = new Request.Builder()
+                .url(url)
+                .build();
+
+        try {
+            Response responses = client.newCall(request).execute();
+            String jsonData = responses.body().string();
+            Log.i(Constant.LOG, jsonData);
+
+
+            // 新浪云网站故障，资源耗尽
+            if (jsonData.contains(Constant.SINA_ERROR_INFO)) {
+                return null;
+            } else {
+                Gson gson = new GsonBuilder().create();
+
+                Log.i(Constant.LOG, jsonData);
+
+                Type listType = new TypeToken<List<SimpleArticleItem>>() {
+                }.getType();
+                List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
+                Log.i(Constant.LOG, articles + "");
+                return articles;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<SimpleArticleItem>();
+
+    }
+
+
     //String 是输入参数
-    class LatestArticleTask extends AsyncTask<String, Void, List<ItemArticle>> {
+    class LatestArticleTask extends AsyncTask<String, Void, List<SimpleArticleItem>> {
 
         @Override
         protected void onPreExecute() {
@@ -260,51 +358,20 @@ public class LatestArticleFragment extends Fragment {
         }
 
         @Override
-        protected List<ItemArticle> doInBackground(String... params) {
-            ItemArticle header1 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20151231/20151231105648_11790.jpg");
-            ItemArticle header2 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20151230/20151230152544_36663.jpg");
-            ItemArticle header3 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20151229/20151229204329_75030.jpg");
-            ItemArticle header4 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20151221/20151221151031_36136.jpg");
+        protected List<SimpleArticleItem> doInBackground(String... params) {
 
-            itemArticleList.add(header1);
-            itemArticleList.add(header2);
-            itemArticleList.add(header2);
-            itemArticleList.add(header3);
+            List<SimpleArticleItem> rotations = getRotationItem();
+            itemArticleList.addAll(rotations);
 
-            ItemArticle item1 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
-            ItemArticle item2 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
-            ItemArticle item3 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
-            ItemArticle item4 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
-            ItemArticle item5 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
-            ItemArticle item6 =
-                    new ItemArticle(20123, "http://see.xidian.edu.cn/uploads/image/20160114/20160114225911_34428.png", "电院2014级开展“让诚信之花开遍冬日校园”教育活动", "2015-01-14", 195, "新闻网",
-                            "从本周开始，同学们将全面进入期末考试阶段，为端正考试态度，确保期末考试有序进行，1月10日晚，1402051、1402052、1402071班在南校区B-443教室开展了以“让诚信之花开遍冬日校园”为主题的晚点名活动。");
+            List<SimpleArticleItem> normals = getArticleList(0, -1);
 
-            itemArticleList.add(item1);
-            itemArticleList.add(item2);
-            itemArticleList.add(item3);
-            itemArticleList.add(item4);
-            itemArticleList.add(item5);
-            itemArticleList.add(item6);
+
+            itemArticleList.addAll(normals);
             return itemArticleList;
         }
 
         @Override
-        protected void onPostExecute(List<ItemArticle> data) {
+        protected void onPostExecute(List<SimpleArticleItem> data) {
             super.onPostExecute(data);
             ArticleAdapter adapter = new ArticleAdapter(mAct, data);
             rcvArticleLatest.setAdapter(adapter);

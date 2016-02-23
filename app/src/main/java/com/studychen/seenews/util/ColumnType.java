@@ -12,9 +12,13 @@ public class ColumnType {
     public static final int ACADEMIC = 5;// 学术交流
     // 选取了电院新闻的部分栏目
     public static final int JOB = 8;// 就业招聘
-}
 
-class Column {
-    int id;
-    String name;
+    /*
+    根据positon，得到对应的栏目
+    注意 position 是连续的，栏目不是连续
+     */
+    public static int getType(int position) {
+        int[] types = {LATEST, NOTIFIC, BACHELOR, MASTER, ACADEMIC, JOB};
+        return types[position];
+    }
 }

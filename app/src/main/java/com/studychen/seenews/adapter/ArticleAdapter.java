@@ -17,6 +17,9 @@ import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.studychen.seenews.model.ItemArticle;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.studychen.seenews.R;
+import com.studychen.seenews.model.SimpleArticleItem;
+import com.studychen.seenews.util.ApiUrl;
+import com.studychen.seenews.util.Constant;
 
 import java.util.List;
 import java.util.Timer;
@@ -36,13 +39,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static final int TYPE_ITEM = 1;
 
     //头部固定为 张图片
-    private static final int NUM_IMAGE = 4;
+    private static final int NUM_IMAGE = 7;
 
     //Handler 用到的参数值
     private static final int UPTATE_VIEWPAGER = 0;
 
     //新闻列表
-    private List<ItemArticle> articleList;
+    private List<SimpleArticleItem> articleList;
 
     //设置当前 第几个图片 被选中
     private int currentIndex = 0;
@@ -55,7 +58,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ImageView[] mCircleImages;//底部只是当前页面的小圆点
 
 
-    public ArticleAdapter(Context context, List<ItemArticle> articleList) {
+    public ArticleAdapter(Context context, List<SimpleArticleItem> articleList) {
         this.context = context;
 
         //头部viewpager图片固定是7张，剩下的是列表的数据
@@ -70,13 +73,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if (viewType == TYPE_ITEM) {
             view = mLayoutInflater.inflate(
-                    R.layout.viewholder_article_item, parent, false);
+                    R.layout.item_article_normal, parent, false);
             return new ItemArticleViewHolder(view);
         }
         //头部返回 ViewPager 实现的轮播图片
         if (viewType == TYPE_HEADER) {
             view = mLayoutInflater.inflate(
-                    R.layout.viewholder_article_header, parent, false);
+                    R.layout.item_article_rotations, parent, false);
             return new HeaderArticleViewHolder(view);
         }
 
@@ -93,19 +96,22 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ItemArticleViewHolder newHolder = (ItemArticleViewHolder) holder;
             //注意RecyclerView第0项是 ViewPager 占据了0 1 2 3图片
             //那么下面的列表展示是 RecyclerView 的第1项，从第4项开始
-            ItemArticle article = articleList.get(position + NUM_IMAGE - 1);
-            newHolder.rcvArticlePhoto.setImageURI(Uri.parse(article.getImageUrl()));
+            SimpleArticleItem article = articleList.get(position + NUM_IMAGE - 1);
+
+            String[] urls = article.getImageUrls();
+            if (urls.length == 0) {
+                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(ApiUrl.randomImageUrl()));
+            } else {
+                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + article.getImageUrls()[0]));
+            }
             newHolder.rcvArticleTitle.setText(article.getTitle());
             newHolder.rcvArticleDate.setText(article.getPublishDate());
-            newHolder.rcvArticleSource.setText(article.getSource());
             //注意这个阅读次数是 int 类型，需要转化为 String 类型
             newHolder.rcvArticleReadtimes.setText(article.getReadTimes() + "次");
-            newHolder.rcvArticlePreview.setText(article.getBody());
         } else if (holder instanceof HeaderArticleViewHolder) {
             HeaderArticleViewHolder newHolder = (HeaderArticleViewHolder) holder;
 
-            List<ItemArticle> headers = articleList.subList(0, NUM_IMAGE );
-            HeaderImageAdapter imageAdapter = new HeaderImageAdapter(context, headers);
+            List<SimpleArticleItem> headers = articleList.subList(0, NUM_IMAGE);
 
             setUpViewPager(newHolder.vpHottest, newHolder.llHottestIndicator, headers);
 
@@ -113,25 +119,25 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    private void setUpViewPager(final ViewPager vp, LinearLayout llBottom, final List<ItemArticle> headerArticles) {
+    private void setUpViewPager(final ViewPager vp, LinearLayout llBottom, final List<SimpleArticleItem> headerArticles) {
         HeaderImageAdapter imageAdapter = new HeaderImageAdapter(context, headerArticles);
         //??这儿有些疑惑，Adapter 里面嵌套设置 Adapter 是否优雅？
         vp.setAdapter(imageAdapter);
 
-        final Handler mHandler = new Handler() {
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case UPTATE_VIEWPAGER:
-                        if (msg.arg1 != 0) {
-                            vp.setCurrentItem(msg.arg1);
-                        } else {
-                            //false 当从末页调到首页是，不显示翻页动画效果，
-                            vp.setCurrentItem(msg.arg1, false);
-                        }
-                        break;
-                }
-            }
-        };
+//        final Handler mHandler = new Handler() {
+//            public void handleMessage(Message msg) {
+//                switch (msg.what) {
+//                    case UPTATE_VIEWPAGER:
+//                        if (msg.arg1 != 0) {
+//                            vp.setCurrentItem(msg.arg1);
+//                        } else {
+//                            //false 当从末页调到首页是，不显示翻页动画效果，
+//                            vp.setCurrentItem(msg.arg1, false);
+//                        }
+//                        break;
+//                }
+//            }
+//        };
 
         //下面是设置动画切换的样式
         vp.setPageTransformer(true, new RotateUpTransformer());
@@ -212,21 +218,21 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         });
 
 
-        //设置自动轮播图片，5s后执行，周期是5s
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Message message = new Message();
-                message.what = UPTATE_VIEWPAGER;
-                if (currentIndex == headerArticles.size() - 1) {
-                    currentIndex = -1;
-                }
-                message.arg1 = currentIndex + 1;
-                mHandler.sendMessage(message);
-            }
-        }, 6000, 6000);
+//        //设置自动轮播图片，5s后执行，周期是5s
+//
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Message message = new Message();
+//                message.what = UPTATE_VIEWPAGER;
+//                if (currentIndex == headerArticles.size() - 1) {
+//                    currentIndex = -1;
+//                }
+//                message.arg1 = currentIndex + 1;
+//                mHandler.sendMessage(message);
+//            }
+//        }, 6000, 6000);
     }
 
     @Override

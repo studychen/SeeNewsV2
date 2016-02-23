@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
@@ -17,6 +17,7 @@
     </style>
 
 
+    <!--右上角小圆点菜单-->
     <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
         <!--兼容Api 21之前的版本 -->
         <item name="overlapAnchor">false</item>

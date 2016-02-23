@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.studychen.seenews.model.ItemArticle;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.studychen.seenews.model.SimpleArticleItem;
+import com.studychen.seenews.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +22,10 @@ import java.util.List;
 public class HeaderImageAdapter extends PagerAdapter {
 
     private Context context;
-    private List<ItemArticle> articles;
+    private List<SimpleArticleItem> articles;
     private List<SimpleDraweeView> sdvs = new ArrayList<SimpleDraweeView>();
 
-    public HeaderImageAdapter(Context context, List<ItemArticle> articles) {
+    public HeaderImageAdapter(Context context, List<SimpleArticleItem> articles) {
         this.context = context;
         if (articles == null || articles.size() == 0) {
             this.articles = new ArrayList<>();
@@ -37,7 +39,7 @@ public class HeaderImageAdapter extends PagerAdapter {
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             sdv.setLayoutParams(layoutParams);
             sdv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Uri uri = Uri.parse(articles.get(i).getImageUrl());
+            Uri uri = Uri.parse(Constant.BUCKET_HOST_NAME+articles.get(i).getImageUrls()[0]);
             sdv.setImageURI(uri);
             sdvs.add(sdv);
         }
@@ -54,7 +56,7 @@ public class HeaderImageAdapter extends PagerAdapter {
         container.removeView(sdvs.get(position));
     }
 
-    public void addData(List<ItemArticle> other) {
+    public void addData(List<SimpleArticleItem> other) {
         if (other != null) {
             articles.addAll(other);
         }

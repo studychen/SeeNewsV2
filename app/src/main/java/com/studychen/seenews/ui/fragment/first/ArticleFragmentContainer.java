@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,9 @@ import butterknife.InjectView;
  * Created by zjq on 2015/6/30.
  */
 public class ArticleFragmentContainer extends Fragment {
-    private static final String SALE_PARAM = "param";
+    private static final String PARAM = "param";
+
+    private static final String LOG = "PAGER_LOG";
 
     @InjectView(R.id.tablayout_article)
     TabLayout tablayout;//Tablayout
@@ -34,7 +37,6 @@ public class ArticleFragmentContainer extends Fragment {
     ViewPager vp;//ViewPager
     private String mParam;
     private Activity mAct;//托管的Activity
-    private List<Fragment> mFragments = new ArrayList<Fragment>();//放置Fragmetn
     private String[] mTitles = new String[]{ColumnName.LATEST, ColumnName.NOTIFIC,
             ColumnName.BACHELOR, ColumnName.MASTER,
             ColumnName.ACADEMIC, ColumnName.JOB};//
@@ -42,7 +44,7 @@ public class ArticleFragmentContainer extends Fragment {
     public static ArticleFragmentContainer newInstance(String param) {
         ArticleFragmentContainer fragment = new ArticleFragmentContainer();
         Bundle args = new Bundle();
-        args.putString(SALE_PARAM, param);
+        args.putString(PARAM, param);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +53,7 @@ public class ArticleFragmentContainer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam = getArguments().getString(SALE_PARAM);
+            mParam = getArguments().getString(PARAM);
         }
     }
 
@@ -87,9 +89,6 @@ public class ArticleFragmentContainer extends Fragment {
      * 设置ViewPager
      */
     private void setViewPager() {
-        //添加数据
-        mFragments.add(LatestArticleFragment.newInstance(""));
-        mFragments.add(OriginalArticleFragment.newInstance(""));
         //设置适配器
         ArticleFragmentAdapter adapter = new ArticleFragmentAdapter(getChildFragmentManager());
         vp.setAdapter(adapter);
@@ -133,9 +132,10 @@ public class ArticleFragmentContainer extends Fragment {
         public Fragment getItem(int position) {
             //首页和其他页不同
             if (position == 0) {
-                return mFragments.get(0);
+                return LatestArticleFragment.newInstance("");
             } else {
-                return OriginalArticleFragment.newInstance(position + "");
+                Log.i(LOG, "in getItem " + position);
+                return OriginalArticleFragment.newInstance(position);
             }
         }
 

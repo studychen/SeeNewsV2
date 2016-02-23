@@ -12,9 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.studychen.seenews.R;
 import com.studychen.seenews.adapter.ArticleAdapter;
 import com.studychen.seenews.model.ItemArticle;
+import com.studychen.seenews.model.SimpleArticleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,19 +34,10 @@ public class ArticleNewsFragment extends Fragment {
 
     //头部新闻图片 URL
     private String mParam;
-
-   class MyHandler extends HandlerThread {
-
-       public MyHandler(String name) {
-           super(name);
-       }
-   }
     //下面新闻图文数据
     private List<ItemArticle> itemArticleList = new ArrayList<ItemArticle>();
-
     //获取 fragment 依赖的 Activity，方便使用 Context
     private Activity mAct;
-
 
     public static Fragment newInstance(String param) {
         ArticleNewsFragment fragment = new ArticleNewsFragment();
@@ -79,7 +72,7 @@ public class ArticleNewsFragment extends Fragment {
 //        rcvArticle.setLayoutManager(new GridLayoutManager(mAct, 2));//这里用线性宫格显示 类似于grid view
 //        rcvArticle.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
 
-        new LatestArticleTask().execute();
+//        new LatestArticleTask().execute();
 
     }
 
@@ -96,48 +89,55 @@ public class ArticleNewsFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    class LatestArticleTask extends AsyncTask<String, Void, List<ItemArticle>> {
+    class MyHandler extends HandlerThread {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<ItemArticle> doInBackground(String... params) {
-            ItemArticle storeInfo1 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            ItemArticle storeInfo2 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            ItemArticle storeInfo3 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            ItemArticle storeInfo4 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            ItemArticle storeInfo5 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            ItemArticle storeInfo6 =
-                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
-                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
-            itemArticleList.add(storeInfo1);
-            itemArticleList.add(storeInfo2);
-            itemArticleList.add(storeInfo3);
-            itemArticleList.add(storeInfo4);
-            itemArticleList.add(storeInfo5);
-            itemArticleList.add(storeInfo6);
-            return itemArticleList;
-        }
-
-        @Override
-        protected void onPostExecute(List<ItemArticle> data) {
-            super.onPostExecute(data);
-            ArticleAdapter adapter = new ArticleAdapter(mAct, data);
-            rcvArticle.setAdapter(adapter);
+        public MyHandler(String name) {
+            super(name);
         }
     }
+
+//    class LatestArticleTask extends AsyncTask<String, Void, List<ItemArticle>> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected List<SimpleArticleItem> doInBackground(String... params) {
+//            ItemArticle storeInfo1 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            ItemArticle storeInfo2 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            ItemArticle storeInfo3 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            ItemArticle storeInfo4 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            ItemArticle storeInfo5 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            ItemArticle storeInfo6 =
+//                    new ItemArticle(20123, "http://i2.sinaimg.cn/ent/j/2012-05-20/U5912P28T3D3634984F328DT20120520152700.JPG", "关于举办《经典音乐作品欣赏与人文审美》讲座的通知", "2015-01-09", 1129, "科学研究院",
+//                            "讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识...");
+//            itemArticleList.add(storeInfo1);
+//            itemArticleList.add(storeInfo2);
+//            itemArticleList.add(storeInfo3);
+//            itemArticleList.add(storeInfo4);
+//            itemArticleList.add(storeInfo5);
+//            itemArticleList.add(storeInfo6);
+//            return itemArticleList;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<SimpleArticleItem> data) {
+//            super.onPostExecute(data);
+//            ArticleAdapter adapter = new ArticleAdapter(mAct, data);
+//            rcvArticle.setAdapter(adapter);
+//        }
+//    }
 
 }
