@@ -6,6 +6,8 @@
 
 ### V 0.4
 - 完善TabLayout，展示6个栏目
+- endless RecyclerView 实现，上拉加载更多
+- Material Design 的圆形 Progress Bar
 
 ### V 0.3
 - 增加启动图标
@@ -29,9 +31,10 @@
 
 ## 依赖的开源类库、工具
 
- - [butterknife](https://github.com/JakeWharton/butterknife)
- - [fresco](https://github.com/facebook/fresco)
- - [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+ - View注入框架，绑定控件和 OnClick 方法[butterknife](https://github.com/JakeWharton/butterknife)
+ - facebook 的图片库，支持圆形、方形，各种缩放等[fresco](https://github.com/facebook/fresco)
+ - 启动图片在线生成工具 [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+ - 圆形 ProgressBar [materialish-progress](https://github.com/pnikosis/materialish-progress)
 
 
 ## 借鉴的 APP
