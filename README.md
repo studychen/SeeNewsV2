@@ -4,9 +4,15 @@
 
 ## 功能开发记录
 
+### V 0.5
+- 完善RecyclerView列表各个新闻的字体颜色
+- 利用自然语言工具包 完成新闻自动摘要
+- 多多Item布局实现，有多幅图片的新闻、无图片的分开展示
+- 基于七牛，获取随机优美图片给无图片新闻使用
+
 ### V 0.4
 - 完善TabLayout，展示6个栏目
-- endless RecyclerView 实现，上拉加载更多
+- Endless RecyclerView 实现，上拉加载更多
 - Material Design 的圆形 Progress Bar
 
 ### V 0.3
@@ -35,7 +41,7 @@
  - facebook 的图片库，支持圆形、方形，各种缩放等[fresco](https://github.com/facebook/fresco)
  - 启动图片在线生成工具 [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
  - 圆形 ProgressBar [materialish-progress](https://github.com/pnikosis/materialish-progress)
-
+ - 自动摘要 [HanLP](https://github.com/hankcs/HanLP)
 
 ## 借鉴的 APP
 
