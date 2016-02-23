@@ -5,7 +5,7 @@
 ## 功能开发记录
 
 ### V 0.5
-- 修复轮播图片小圆点重复问题 
+- 修复轮播图片小圆点重复问题<br> 
   当 RecyclerView 的 Item 超出屏幕后，会重新执行onBindViewHolder
 - 
 
