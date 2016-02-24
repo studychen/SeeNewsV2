@@ -7,7 +7,9 @@
 ### V 0.5
 - 修复轮播图片小圆点重复问题<br> 
   当 RecyclerView 的 Item 超出屏幕后，会重新执行onBindViewHolder
-- 
+- 完成新闻详情页面xml和Activity
+- CollapsingToolbarLayout 实现图片和toolbar上拉隐藏
+- 解决webview内容过少，上滑失效的问题
 
 ### V 0.5
 - 完善RecyclerView列表各个新闻的字体颜色
