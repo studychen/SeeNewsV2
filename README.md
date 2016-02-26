@@ -2,6 +2,10 @@
 
 ## 新闻Android客户端 基于Material Design
 
+
+## 效果图
+<img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
+
 ## 功能开发记录
 
 ### V 0.5
