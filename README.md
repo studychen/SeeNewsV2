@@ -53,6 +53,8 @@
  - 启动图片在线生成工具 [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
  - 圆形 ProgressBar [materialish-progress](https://github.com/pnikosis/materialish-progress)
  - 自动摘要 [HanLP](https://github.com/hankcs/HanLP)
+ - Sqlite 轻量级ORM [ActiveAndroid](https://github.com/pardom/ActiveAndroid)
+ - 访问http请求 [okhttp](https://github.com/square/okhttp)
 
 ## 借鉴的 APP
 
