@@ -1,91 +1,88 @@
 <!-- RecyclerView 的每一项布局-->
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="?attr/windowBackground"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
-    app:contentPadding="10dp">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp">
 
-
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/rcv_article_photo"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="80dp"
-            fresco:actualImageScaleType="focusCrop" />
+        app:cardBackgroundColor="?attr/windowBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="@dimen/content_padding">
 
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/rcv_article_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center"
-                android:text="关于举办《经典音乐作品欣赏与人文审美》讲座的通知" />
-            <!-- 新闻 发布时间 来源 阅读次数-->
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/rcv_article_photo"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                fresco:actualImageScaleType="focusCrop" />
+
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/rcv_article_date"
+                    android:id="@+id/rcv_article_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="10dp"
-                    android:text="2015-01-09" />
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="关于举办《经典音乐作品欣赏与人文审美》讲座的通知"
+                    android:textSize="@dimen/list_title_size" />
+                <!-- 新闻 发布时间 来源 阅读次数-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/rcv_article_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center"
+                        android:text="2015-01-09"
+                        android:textColor="@color/text_sub" />
+
+                    <TextView
+                        android:id="@+id/rcv_article_readtimes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="浏览: 1129次"
+                        android:textColor="@color/text_sub" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/rcv_article_source"
+                    android:id="@+id/rcv_article_summary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="10dp"
-                    android:text="教务处" />
-
-                <TextView
-                    android:id="@+id/rcv_article_readtimes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="2dp"
-                    android:text="1129次" />
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识..."
+                    android:textColor="@color/text_sub" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/rcv_article_preview"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="讲座主要内容：以中、西方音乐历史中经典音乐作品为基础，通过作曲家及作品创作背景、相关音乐文化史知识及音乐欣赏常识..." />
-
         </LinearLayout>
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
-
+    </android.support.v7.widget.CardView>
+</LinearLayout>

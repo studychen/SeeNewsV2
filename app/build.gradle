@@ -30,9 +30,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:design:22.2.0'
-    compile 'com.android.support:cardview-v7:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
     //视图注入
     compile files('libs/butterknife-6.1.0.jar')
     //图片缓存
@@ -53,6 +53,9 @@ dependencies {
     // progressbar
     compile 'com.pnikosis:materialish-progress:1.7'
 
+    // SnackBar
+    compile 'com.nispok:snackbar:2.11.+'
+    //解析json
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'

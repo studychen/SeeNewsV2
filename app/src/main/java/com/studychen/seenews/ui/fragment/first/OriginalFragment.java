@@ -96,7 +96,7 @@ public class OriginalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_first_original, container, false);
+        View view = inflater.inflate(R.layout.frag_first_other, container, false);
         mAct = getActivity();
         ButterKnife.inject(this, view);
         return view;

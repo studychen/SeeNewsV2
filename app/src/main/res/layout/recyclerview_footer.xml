@@ -8,8 +8,8 @@
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/rcv_load_more"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         wheel:matProg_barColor="@color/accent"
         wheel:matProg_progressIndeterminate="true" />

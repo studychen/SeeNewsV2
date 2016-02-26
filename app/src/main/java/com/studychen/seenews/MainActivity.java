@@ -22,7 +22,7 @@ import com.studychen.seenews.util.NightModeHelper;
 import com.studychen.seenews.util.PrefUtils;
 import com.studychen.seenews.ui.fragment.first.ArticleFragmentContainer;
 import com.studychen.seenews.ui.fragment.second.TestNightFragment;
-import com.studychen.seenews.ui.fragment.store.ArticleNewsFragment;
+import com.studychen.seenews.ui.fragment.third.ArticleNewsFragment;
 
 
 import butterknife.ButterKnife;

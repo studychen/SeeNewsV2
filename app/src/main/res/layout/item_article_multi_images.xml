@@ -1,86 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- RecyclerView 的每一项布局-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:cardBackgroundColor="?attr/windowBackground"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
-    app:contentPadding="5dp">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/article_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="关于举办《经典音乐作品欣赏与人文审美》讲座的通知" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <!--actualImageScaleType=focusCrop 缩放使得人像在中间-->
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/article_pic1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                fresco:actualImageScaleType="focusCrop" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/article_pic2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                fresco:actualImageScaleType="focusCrop" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/article_pic3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                fresco:actualImageScaleType="focusCrop" />
-        </LinearLayout>
+        android:orientation="vertical"
+        app:cardBackgroundColor="?attr/windowBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="@dimen/content_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/count_pics"
+                android:id="@+id/article_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="图片: 7" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="关于举办《经典音乐作品欣赏与人文审美》讲座的通知" />
 
-            <TextView
-                android:id="@+id/count_read"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <!--actualImageScaleType=focusCrop 缩放使得人像在中间-->
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/article_pic1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    fresco:actualImageScaleType="focusCrop" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/article_pic2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    fresco:actualImageScaleType="focusCrop" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/article_pic3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    fresco:actualImageScaleType="focusCrop" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="浏览: 3" />
+                android:layout_marginTop="5dp"
+                android:gravity="end"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/count_pics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="图片: 7"
+                    android:textColor="@color/text_sub" />
 
+                <TextView
+                    android:id="@+id/count_read"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="浏览: 3"
+                    android:textColor="@color/text_sub" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

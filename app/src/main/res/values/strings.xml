@@ -11,7 +11,7 @@
 
     <!--tabs 简便用 first second third-->
     <string name="main_tab_first">新闻</string>
-    <string name="main_tab_second">阅读</string>
+    <string name="main_tab_second">热点</string>
     <string name="main_tab_third">我</string>
 
     <!--侧滑导航-->
@@ -24,6 +24,14 @@
     <!--首页ActionBarDrawerToggle-->
     <string name="open">打开</string>
     <string name="close">关闭</string>
+
+    <!-- list 到了最底部 没有新数据了-->
+    <string name="list_more_data">更新了0条数据~</string>
+
+
+    <!-- list 到了最底部 没有新数据了-->
+    <string name="list_no_data">没有新的内容了哦~</string>
+
 
     <!--首页搜索框-->
     <string name="action_search_title">选择搜索内容</string>

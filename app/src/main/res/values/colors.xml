@@ -4,6 +4,10 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
+    <!-- 阅读次数 文章摘要的颜色-->
+    <color name="text_sub">#898989</color>
+
+
     <!--亮蓝灰 -->
     <color name="slategray">#C2C2C2</color>
     <!--青绿色 -->
@@ -30,8 +34,11 @@
     <color name="colorPrimaryDarkDarkTheme">#4a4959</color>
     <color name="colorAccentDarkTheme">#E91E63</color>
     <color name="fabCircleColor_dark">#0288D1</color>
-    <color name="window_background">#FFF5F5F5</color>
+    <color name="window_background">@android:color/white</color>
     <color name="window_background_dark">#403f4d</color>
+    <!--列表展示的浅灰色背景 让白色的item更加突出-->
+    <color name="list_background">#E5E5E5</color>
+    <color name="list_background_dark">@color/window_background_dark</color>
 
     <!--粉红色 -->
     <color name="lightpink">#ffb6c1</color>

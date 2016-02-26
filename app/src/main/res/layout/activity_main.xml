@@ -2,9 +2,9 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
-    android:background="?attr/windowBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/windowBackground">
     <!--主页面-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,8 +35,7 @@
                     app:contentInsetStart="0dp"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:popupTheme="@style/MyOptionMenuStyle"
-                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-                </android.support.v7.widget.Toolbar>
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.AppBarLayout>
 
@@ -96,9 +95,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        app:itemIconTint="?attr/stateSelector"
         app:itemTextColor="?attr/stateSelector"
-        app:menu="@menu/drawer_view"
-        app:itemIconTint="?attr/stateSelector"/>
+        app:menu="@menu/drawer_view" />
 
 </android.support.v4.widget.DrawerLayout>
 

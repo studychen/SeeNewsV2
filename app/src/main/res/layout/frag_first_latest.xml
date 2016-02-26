@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--最新栏目的新闻-->
+<?xml version="1.0" encoding="utf-8"?><!--最新栏目的新闻-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/listBackground"
     android:orientation="vertical">
 
-    <!-- 轮播图片作为 RecyclerView 的第一项-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_article_latest"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content">
+        <!-- 轮播图片作为 RecyclerView 的第一项-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_article_latest"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

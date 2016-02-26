@@ -13,7 +13,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.studychen.seenews.R;
 import com.studychen.seenews.model.SimpleArticleItem;
+import com.studychen.seenews.util.ApiUrl;
 import com.studychen.seenews.util.Constant;
+import com.studychen.seenews.util.OnItemClickLitener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +33,9 @@ import butterknife.InjectView;
 public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    public final static int TYPE_MULTI_IMAGES = 3; // 多个图片的文章
-    public final static int TYPE_FOOTER = 2;//底部--往往是loading_more
+    public final static int TYPE_MULTI_IMAGES = 2; // 多个图片的文章
+    public final static int TYPE_FOOTER = 3;//底部--往往是loading_more
     public final static int TYPE_NORMAL = 1; // 正常的一条文章
-    private static final String LOG = "PAGER_LOG";
-    private final static Random random = new Random(47);
     //新闻列表
     private List<SimpleArticleItem> articleList;
     //context
@@ -43,9 +43,9 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private LayoutInflater mLayoutInflater;
 
+    private OnItemClickLitener mOnItemClickLitener;//点击 RecyclerView 中的 Item
 
-    public OriginArticleAdapter(Context context, List<SimpleArticleItem> articleList
-            , RecyclerView recyclerView) {
+    public OriginArticleAdapter(Context context, List<SimpleArticleItem> articleList) {
         this.context = context;
         if (articleList == null) {
             this.articleList = new ArrayList<SimpleArticleItem>();
@@ -73,11 +73,11 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
             default:
             case TYPE_NORMAL:
                 view = mLayoutInflater.inflate(
-                        R.layout.viewholder_article_simple, parent, false);
+                        R.layout.item_article_normal, parent, false);
                 vh = new ItemArticleViewHolder(view);
                 return vh;
             case TYPE_FOOTER:
-                Log.i(LOG, "in TYPE_FOOTER");
+                Log.i(Constant.LOG, "in TYPE_FOOTER");
                 view = mLayoutInflater.inflate(
                         R.layout.recyclerview_footer, parent, false);
                 vh = new FooterViewHolder(view);
@@ -91,7 +91,7 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
         //这时候 article是 null，先把 footer 处理了
         if (holder instanceof FooterViewHolder) {
@@ -106,19 +106,28 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
             ItemArticleViewHolder newHolder = (ItemArticleViewHolder) holder;
             newHolder.rcvArticleTitle.setText(article.getTitle());
             newHolder.rcvArticleDate.setText(article.getPublishDate());
-            Log.i(LOG, article + "");
+            Log.i(Constant.LOG, article + "");
             //当图片小于3张时候 选取第1张图片
             if (imageUrls.length > 0) {
                 newHolder.rcvArticlePhoto.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME
                         + imageUrls[0]));
             } else {
-
-                String randomUrl = Constant.RANDOM_IMAGE + random.nextInt(Constant.COUNT_IMAGE);
-                Log.i(LOG, article.getId() + " in  RANDOM_IMAGE " + randomUrl);
-                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(randomUrl));
+                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(ApiUrl.randomImageUrl(article.getId())));
             }
             //注意这个阅读次数是 int 类型，需要转化为 String 类型
-            newHolder.rcvArticleReadtimes.setText(article.getReadTimes() + "次");
+            newHolder.rcvArticleReadtimes.setText("浏览: " + article.getReadTimes());
+
+            newHolder.rcvArticleSummary.setText(article.getSummary());
+            // 如果设置了回调，则设置点击事件
+            if (mOnItemClickLitener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = holder.getLayoutPosition();
+                        mOnItemClickLitener.onItemClick(pos);
+                    }
+                });
+            }
         } else {
             MultiImagesViewHolder newHolder = (MultiImagesViewHolder) holder;
             newHolder.articleTitle.setText(article.getTitle());
@@ -128,6 +137,16 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
             newHolder.countPics.setText("图片: " + imageUrls.length);
             newHolder.countRead.setText("浏览: " + article.getReadTimes());
 
+            // 如果设置了回调，则设置点击事件
+            if (mOnItemClickLitener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = holder.getLayoutPosition();
+                        mOnItemClickLitener.onItemClick(pos);
+                    }
+                });
+            }
         }
 
     }
@@ -161,26 +180,28 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (articleList != null) {
             return articleList.size();
         } else {
-            Log.i(LOG, "OriginArticleAdapter getItemCount return 0");
+            Log.i(Constant.LOG, "OriginArticleAdapter getItemCount return 0");
             return 0;
         }
     }
 
 
     public int getBottomArticleId() {
-        if (articleList == null)
+        if (articleList == null || articleList.size() == 0)
             return -1;
         return articleList.get(articleList.size() - 1).getId();
     }
 
-    /**
-     * 加载更多接口
-     */
-    public interface OnLoadMoreListener {
-        /**
-         * 加载更多
-         */
-        void onLoadMore();
+    //返回最底的文章id，为了下拉刷新从该id开始加载
+    public int getTopArticleId() {
+        if (articleList == null || articleList.size() == 0)
+            return -1;
+        return articleList.get(0).getId();
+    }
+
+
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
     class ItemArticleViewHolder extends RecyclerView.ViewHolder {
@@ -193,6 +214,8 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView rcvArticleDate;
         @InjectView(R.id.rcv_article_readtimes)
         TextView rcvArticleReadtimes;
+        @InjectView(R.id.rcv_article_summary)
+        TextView rcvArticleSummary;
 
         public ItemArticleViewHolder(View itemView) {
             super(itemView);

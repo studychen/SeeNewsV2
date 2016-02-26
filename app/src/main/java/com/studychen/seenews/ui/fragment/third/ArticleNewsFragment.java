@@ -1,7 +1,6 @@
-package com.studychen.seenews.ui.fragment.store;
+package com.studychen.seenews.ui.fragment.third;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.HandlerThread;
 import android.support.annotation.Nullable;
@@ -14,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studychen.seenews.R;
-import com.studychen.seenews.adapter.ArticleAdapter;
 import com.studychen.seenews.model.ItemArticle;
-import com.studychen.seenews.model.SimpleArticleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +132,7 @@ public class ArticleNewsFragment extends Fragment {
 //        @Override
 //        protected void onPostExecute(List<SimpleArticleItem> data) {
 //            super.onPostExecute(data);
-//            ArticleAdapter adapter = new ArticleAdapter(mAct, data);
+//            LatestArticleAdapter adapter = new LatestArticleAdapter(mAct, data);
 //            rcvArticle.setAdapter(adapter);
 //        }
 //    }

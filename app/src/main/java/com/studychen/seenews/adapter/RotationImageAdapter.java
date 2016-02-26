@@ -19,13 +19,13 @@ import java.util.List;
  * 头部轮播图片的适配类
  * Created by tomchen on 2015/8/28.
  */
-public class HeaderImageAdapter extends PagerAdapter {
+public class RotationImageAdapter extends PagerAdapter {
 
     private Context context;
     private List<SimpleArticleItem> articles;
     private List<SimpleDraweeView> sdvs = new ArrayList<SimpleDraweeView>();
 
-    public HeaderImageAdapter(Context context, List<SimpleArticleItem> articles) {
+    public RotationImageAdapter(Context context, List<SimpleArticleItem> articles) {
         this.context = context;
         if (articles == null || articles.size() == 0) {
             this.articles = new ArrayList<>();
@@ -39,7 +39,7 @@ public class HeaderImageAdapter extends PagerAdapter {
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             sdv.setLayoutParams(layoutParams);
             sdv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Uri uri = Uri.parse(Constant.BUCKET_HOST_NAME+articles.get(i).getImageUrls()[0]);
+            Uri uri = Uri.parse(Constant.BUCKET_HOST_NAME + articles.get(i).getImageUrls()[0]);
             sdv.setImageURI(uri);
             sdvs.add(sdv);
         }
@@ -56,13 +56,6 @@ public class HeaderImageAdapter extends PagerAdapter {
         container.removeView(sdvs.get(position));
     }
 
-    public void addData(List<SimpleArticleItem> other) {
-        if (other != null) {
-            articles.addAll(other);
-        }
-        notifyDataSetChanged();
-
-    }
 
     @Override
     public int getCount() {

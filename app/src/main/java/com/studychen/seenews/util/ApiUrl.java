@@ -12,7 +12,6 @@ public class ApiUrl {
     public static final String saeIP = "http://javanews.applinzi.com/";
     // 本地局域网 ip，测试使用
     public static final String localIP = "http://192.168.199.133:8080/seenewsv2/";
-    private static final Random random = new Random(47);
     private static final boolean isCloud = false;
 
     public static String columnUrl() {
@@ -45,12 +44,27 @@ public class ApiUrl {
     }
 
     /**
+     * list 刷新
+     * 选择大于某个id的新闻数组
+     *
+     * @return
+     */
+    public static String moreThanUrl() {
+        String suffix = "columnMore?column=%d&morethan=%d";
+        if (isCloud)
+            return saeIP + suffix;
+        else
+            return localIP + suffix;
+    }
+
+
+    /**
      * 首页的轮播图片
      *
      * @return
      */
-    public static String randomImageUrl() {
-
+    public static String randomImageUrl(int seed) {
+        Random random = new Random(seed);
         return Constant.RANDOM_IMAGE + random.nextInt(Constant.COUNT_IMAGE);
     }
 

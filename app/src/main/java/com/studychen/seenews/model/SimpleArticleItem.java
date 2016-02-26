@@ -21,9 +21,34 @@ public class SimpleArticleItem {
     private String publishDate;
     private int readTimes;
 
+    private String summary;
+
+    public SimpleArticleItem() {
+
+    }
+
+    public SimpleArticleItem(int id, String[] imageUrls, String title, String publishDate, int readTimes) {
+        this.id = id;
+        this.imageUrls = imageUrls;
+        this.title = title;
+        this.publishDate = publishDate;
+        this.readTimes = readTimes;
+    }
+
+    public SimpleArticleItem(int id, String[] imageUrls, String title, String publishDate, int readTimes,
+                             String summary) {
+        this.id = id;
+        this.imageUrls = imageUrls;
+        this.title = title;
+        this.publishDate = publishDate;
+        this.readTimes = readTimes;
+        this.summary = summary;
+    }
+
     /**
      * 这个的设计不是很好
      * 存储轮播图片
+     *
      * @param id
      * @param imageUrls
      * @param title
@@ -36,12 +61,33 @@ public class SimpleArticleItem {
         this.type = type;
     }
 
-    public SimpleArticleItem(int id, String[] imageUrls, String title, String publishDate, int readTimes) {
-        this.id = id;
-        this.imageUrls = imageUrls;
-        this.title = title;
-        this.publishDate = publishDate;
-        this.readTimes = readTimes;
+    @Override
+    public String toString() {
+        return "SimpleArticleItem{" +
+                "type=" + type +
+                ", id=" + id +
+                ", imageUrls=" + Arrays.toString(imageUrls) +
+                ", title='" + title + '\'' +
+                ", publishDate='" + publishDate + '\'' +
+                ", readTimes=" + readTimes +
+                ", summary='" + summary + '\'' +
+                '}';
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -84,15 +130,4 @@ public class SimpleArticleItem {
         this.readTimes = readTimes;
     }
 
-    @Override
-    public String toString() {
-        return "SimpleArticleItem{" +
-                "type=" + type +
-                ", id=" + id +
-                ", imageUrls=" + Arrays.toString(imageUrls) +
-                ", title='" + title + '\'' +
-                ", publishDate='" + publishDate + '\'' +
-                ", readTimes=" + readTimes +
-                '}';
-    }
 }

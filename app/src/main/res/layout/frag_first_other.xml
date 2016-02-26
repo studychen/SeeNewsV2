@@ -2,13 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/listBackground"
     android:orientation="vertical">
 
-    <!-- 新闻列表展示-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_article_origin"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"  />
+        android:layout_height="wrap_content">
+        <!-- 新闻列表展示-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_article_origin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <!--ViewPager 热门文章图片展示-->
     <!--<FrameLayout-->

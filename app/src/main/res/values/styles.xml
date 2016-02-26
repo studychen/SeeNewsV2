@@ -14,6 +14,7 @@
         <item name="windowBackground">@color/window_background</item>
         <item name="fabCircleColor">@color/fabCircleColor_light</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
+        <item name="listBackground">@color/list_background</item>
     </style>
 
 
@@ -36,6 +37,8 @@
         <item name="windowBackground">@color/window_background_dark</item>
         <item name="fabCircleColor">@color/fabCircleColor_dark</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
+        <!--listBackground list 列表展示的背景色 让白色item突出-->
+        <item name="listBackground">@color/list_background_dark</item>
     </style>
 
     <!--主页tabs样式-->

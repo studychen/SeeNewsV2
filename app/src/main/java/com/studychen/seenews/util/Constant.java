@@ -9,6 +9,13 @@ public class Constant {
     //随机图片
     public static final String RANDOM_IMAGE = "http://7xr4g8.com1.z0.glb.clouddn.com/";
     public static final int COUNT_IMAGE = 965;
+
+    //轮播图片的数目
+    public static final int COUNT_ROTATION = 7;
+
+    // 控制还剩几项新闻的时候加载更多
+    public static final int VISIBLE_THRESHOLD = 3;
+
     public static final String LOG = "PAGER_LOG";
     public static final String SINA_ERROR_INFO = "您所访问的网站发生故障";
 
