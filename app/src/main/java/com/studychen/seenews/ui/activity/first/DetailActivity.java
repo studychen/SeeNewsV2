@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +23,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.studychen.seenews.R;
+import com.studychen.seenews.db.ReviewedArticle;
 import com.studychen.seenews.model.ArticleItem;
 import com.studychen.seenews.ui.fragment.first.LatestArticleFragment;
 import com.studychen.seenews.util.ApiUrl;
@@ -58,8 +58,11 @@ public class DetailActivity extends AppCompatActivity {
     @InjectView(R.id.detail_article)
     LinearLayout detailArticle;
 
-    private int articleID;
     private int columnType;
+    private int articleID;
+    private String title;
+    private String date;
+    private int read;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +72,12 @@ public class DetailActivity extends AppCompatActivity {
 
         initToolbar();
 
-
         columnType = getIntent().getIntExtra(LatestArticleFragment.COLUMN_TYPE, 0);
         articleID = getIntent().getIntExtra(LatestArticleFragment.ARTICLE_ID, 7948);
+        title = getIntent().getStringExtra(LatestArticleFragment.ARTICLE_TITLE);
+        date = getIntent().getStringExtra(LatestArticleFragment.ARTICLE_DATE);
+        read = getIntent().getIntExtra(LatestArticleFragment.ARTICLE_READ, 452);
+
         new LatestArticleTask().execute(columnType, articleID);
     }
 
@@ -180,6 +186,13 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         protected ArticleItem doInBackground(Integer... params) {
+            ReviewedArticle articleHistory = new ReviewedArticle();
+            articleHistory.type = params[0];
+            articleHistory.id = params[1];
+            articleHistory.title = title;
+            articleHistory.date = date;
+            articleHistory.read = read;
+            articleHistory.save();
             return getArticleDetail(params[0], params[1]);
         }
 

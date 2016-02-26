@@ -1,6 +1,7 @@
 package com.studychen.seenews;
 
 import android.app.UiModeManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.studychen.seenews.ui.activity.menu.HistoryActivity;
 import com.studychen.seenews.util.NightModeHelper;
 import com.studychen.seenews.util.PrefUtils;
 import com.studychen.seenews.ui.fragment.first.ArticleFragmentContainer;
@@ -32,7 +34,9 @@ import butterknife.OnCheckedChanged;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String savedTab = "savedTab";
+
     private static final String Log_FILTER = "param";
+
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.fragment_container)
@@ -174,7 +178,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (PrefUtils.isDarkMode()) {
             colorId = R.color.colorAccentDarkTheme;
         }
-        
+
         new MaterialDialog.Builder(this).title(R.string.action_search_title)
                 .items(R.array.search_content_main)
                 .itemColorRes(colorId)
@@ -264,16 +268,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ButterKnife.reset(this);
     }
 
+    private boolean prepareIntent(Class clazz) {
+        startActivity(new Intent(MainActivity.this, clazz));
+        return true;
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-//        if (menuItem.isChecked()) {
-//            menuItem.setChecked(false);
-//        } else {
-//            menuItem.setChecked(true);
-//        }
-
-        int id = menuItem.getItemId();
-        return true;
+        if (menuItem.isChecked()) {
+            menuItem.setChecked(false);
+        } else {
+            menuItem.setChecked(true);
+        }
+        switch (menuItem.getItemId()) {
+            case R.id.nav_review:
+                return prepareIntent(HistoryActivity.class);
+            default:
+                return true;
+        }
     }
 
 }

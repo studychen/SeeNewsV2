@@ -53,6 +53,9 @@ public class OriginalArticleFragment extends Fragment {
 
 
     public static final String ARTICLE_ID = "id";
+    public static final String ARTICLE_TITLE = "title";
+    public static final String ARTICLE_DATE = "date";
+    public static final String ARTICLE_READ = "read_times";
     public static final String COLUMN_TYPE = "type";
     private static final String POSITION = "column";
     private static final String LOG = "PAGER_LOG";
@@ -155,6 +158,10 @@ public class OriginalArticleFragment extends Fragment {
                 Intent intent = new Intent(mActivity, DetailActivity.class);
                 intent.putExtra(COLUMN_TYPE, mColumn);
                 intent.putExtra(ARTICLE_ID, articleItem.getId());
+                intent.putExtra(ARTICLE_TITLE, articleItem.getTitle());
+                intent.putExtra(ARTICLE_DATE, articleItem.getPublishDate());
+                intent.putExtra(ARTICLE_READ, articleItem.getReadTimes());
+
                 startActivity(intent);
             }
         });
@@ -320,8 +327,9 @@ public class OriginalArticleFragment extends Fragment {
         protected void onPostExecute(List<SimpleArticleItem> simpleArticleItems) {
             super.onPostExecute(simpleArticleItems);
 
-            swipeRefreshLayout.setRefreshing(false);
-
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
             //没有新的数据，提示消息
             if (simpleArticleItems == null || simpleArticleItems.size() == 0) {
                 Snackbar.with(mActivity.getApplicationContext()) // context

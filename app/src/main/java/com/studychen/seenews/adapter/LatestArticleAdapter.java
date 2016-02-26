@@ -59,6 +59,14 @@ public class LatestArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
     private OnItemClickLitener mOnItemClickLitener;//点击 RecyclerView 中的 Item
 
 
+    /**
+     * 注意这儿的 articleList 和原来的articleList 是同一个引用
+     * fragment 的文章list增加了数据
+     * 这儿的list也增加数据
+     *
+     * @param context
+     * @param articleList
+     */
     public LatestArticleAdapter(Context context, List<SimpleArticleItem> articleList) {
         this.context = context;
 

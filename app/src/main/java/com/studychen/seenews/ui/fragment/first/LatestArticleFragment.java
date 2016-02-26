@@ -49,6 +49,9 @@ import butterknife.InjectView;
 public class LatestArticleFragment extends Fragment {
 
     public static final String ARTICLE_ID = "id";
+    public static final String ARTICLE_TITLE = "title";
+    public static final String ARTICLE_READ = "read_times";
+    public static final String ARTICLE_DATE = "date";
     public static final String COLUMN_TYPE = "type";
     private static final String ARTICLE_LATEST_PARAM = "param";
     private static final int UPTATE_VIEWPAGER = 0;
@@ -125,7 +128,6 @@ public class LatestArticleFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_first_latest, container, false);
         ButterKnife.inject(this, view);
         mActivity = getActivity();
-        Log.i(Constant.LOG, "获得的Activity " + mActivity);
         mArticleList = new ArrayList<SimpleArticleItem>();
         return view;
 
@@ -188,6 +190,9 @@ public class LatestArticleFragment extends Fragment {
                 Intent intent = new Intent(mActivity, DetailActivity.class);
                 intent.putExtra(COLUMN_TYPE, TYPE_INT);
                 intent.putExtra(ARTICLE_ID, articleItem.getId());
+                intent.putExtra(ARTICLE_TITLE, articleItem.getTitle());
+                intent.putExtra(ARTICLE_DATE, articleItem.getPublishDate());
+                intent.putExtra(ARTICLE_READ, articleItem.getReadTimes());
                 startActivity(intent);
             }
         });
@@ -388,12 +393,9 @@ public class LatestArticleFragment extends Fragment {
             } else {
                 Gson gson = new GsonBuilder().create();
 
-                Log.i(Constant.LOG, "json数据" + jsonData);
-
                 Type listType = new TypeToken<List<SimpleArticleItem>>() {
                 }.getType();
                 List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, "json解析的Articles" + articles);
                 return articles;
             }
         } catch (IOException e) {
@@ -476,8 +478,9 @@ public class LatestArticleFragment extends Fragment {
         protected void onPostExecute(List<SimpleArticleItem> simpleArticleItems) {
             super.onPostExecute(simpleArticleItems);
 
-            swipeRefreshLayout.setRefreshing(false);
-
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
             //没有新的数据，提示消息
             if (simpleArticleItems == null || simpleArticleItems.size() == 0) {
                 Snackbar.with(mActivity.getApplicationContext()) // context

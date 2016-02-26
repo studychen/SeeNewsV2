@@ -12,7 +12,7 @@
             android:icon="@drawable/drawer_action_collection"
             android:title="我的收藏" />
         <item
-            android:id="@+id/nav_read"
+            android:id="@+id/nav_review"
             android:icon="@drawable/drawer_action_read"
             android:title="浏览历史" />
     </group>

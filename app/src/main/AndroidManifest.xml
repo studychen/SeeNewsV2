@@ -3,6 +3,8 @@
     package="com.studychen.seenews">
     <!--权限-->
     <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".app.SeeNewsApp"
         android:allowBackup="true"
@@ -22,13 +24,19 @@
 
         <activity android:name=".ui.activity.first.DetailActivity"></activity>
 
+        <activity android:name=".ui.activity.menu.HistoryActivity"></activity>
+
         <!--数据库 active android-->
         <meta-data
             android:name="AA_DB_NAME"
             android:value="seenews.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:value="3" />
+
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.studychen.seenews.db.ReviewedArticle" />
     </application>
 
 </manifest>
