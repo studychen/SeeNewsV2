@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navView.setNavigationItemSelectedListener(this);
 
 
-        //onSaveInstanceState会保存已点击 tab 的 id
+        //onSaveInstanceState会保存已点击 tab 的 aid
         if (savedInstanceState == null) {
             //默认将第一个RadioButton设为选中
             Log.i(Log_FILTER, "savedInstanceState  null");
@@ -163,7 +163,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.men_action_change_mode:
                 PrefUtils.setDarkMode(!PrefUtils.isDarkMode());
                 MainActivity.this.recreate();//重新创建当前Activity实例
-                Toast.makeText(this, "yenight", Toast.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

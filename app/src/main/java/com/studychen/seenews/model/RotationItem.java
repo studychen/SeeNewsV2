@@ -25,7 +25,7 @@ public class RotationItem {
 	
 	@Override
 	public String toString() {
-		return "RotationItem [id=" + id + ", imageUrl=" + imageUrl + ", title=" + title + ", type=" + type + "]";
+		return "RotationItem [aid=" + id + ", imageUrl=" + imageUrl + ", title=" + title + ", type=" + type + "]";
 	}
 
 

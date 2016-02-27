@@ -56,6 +56,14 @@ dependencies {
     // SnackBar
     compile 'com.nispok:snackbar:2.11.+'
     //解析json
+
+    //侧滑删除
+    compile 'com.android.support:support-v4:20.+'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+
+
+    //设置 material
+    compile 'com.github.kenumir:MaterialSettings:v.1.2.2'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'

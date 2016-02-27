@@ -2,6 +2,7 @@ package com.studychen.seenews.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.studychen.seenews.R;
-import com.studychen.seenews.db.ReviewedArticle;
-import com.studychen.seenews.model.SimpleArticleItem;
-import com.studychen.seenews.util.ApiUrl;
+import com.studychen.seenews.model.ReviewedArticle;
 import com.studychen.seenews.util.Constant;
+import com.studychen.seenews.util.GetTimeAgo;
+import com.studychen.seenews.util.OnDeleteClickLitener;
 import com.studychen.seenews.util.OnItemClickLitener;
+import com.studychen.seenews.util.OnItemLongClickLitener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,8 @@ public class HistoryArticleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private LayoutInflater mLayoutInflater;
 
     private OnItemClickLitener mOnItemClickLitener;//点击 RecyclerView 中的 Item
+    private OnItemLongClickLitener mOnItemLongClickLitener;//点击 RecyclerView 中的 Item
+    private OnDeleteClickLitener mOnDeleteClickLitener;//点击 RecyclerView 中的 Item
 
     public HistoryArticleAdapter(Context context, List<ReviewedArticle> articleList) {
         this.context = context;
@@ -61,30 +67,60 @@ public class HistoryArticleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = mLayoutInflater.inflate(
-                R.layout.item_article_normal, parent, false);
+                R.layout.item_article_history, parent, false);
 
         return new HistoryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         ReviewedArticle article = articleList.get(position);
 
         HistoryViewHolder newHolder = (HistoryViewHolder) holder;
-        newHolder.rcvArticleTitle.setText(article.title);
-        newHolder.rcvArticleDate.setText(article.date + "发布");
 
-        //注意这个阅读次数是 int 类型，需要转化为 String 类型
-        newHolder.rcvArticleReadtimes.setText(article.read + "已阅");
+        newHolder.rcvArticlePhoto.setImageURI(Uri.parse(article.photoKey));
+        Log.i(Constant.LOG, "得到 标题" + article.title);
+        Log.i(Constant.LOG, "得到 setImageURI" + article.photoKey);
+
+        newHolder.rcvArticleTitle.setText(article.title);
+
+        newHolder.rcvClickTime.setText(GetTimeAgo.getTimeAgo(article.clickTime));
+
+        newHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+
 
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            newHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
                     mOnItemClickLitener.onItemClick(pos);
+                }
+            });
+        }
+
+        // 如果设置了长按的回调方法
+        if (mOnItemLongClickLitener != null) {
+            newHolder.swipeLayout.getSurfaceView().setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemLongClickLitener.onItemLongClick(pos);
+                    return false;
+                }
+
+            });
+        }
+
+        if (mOnDeleteClickLitener != null) {
+            newHolder.cvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnDeleteClickLitener.onDeleteClick(pos);
                 }
             });
         }
@@ -106,15 +142,28 @@ public class HistoryArticleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
+
+    public void setOnItemLongClickLitener(OnItemLongClickLitener mOnItemLongClickLitener) {
+        this.mOnItemLongClickLitener = mOnItemLongClickLitener;
+    }
+
+    public void setOnDeleteClickLitener(OnDeleteClickLitener mOnDeleteClickLitener) {
+        this.mOnDeleteClickLitener = mOnDeleteClickLitener;
+    }
+
     class HistoryViewHolder extends RecyclerView.ViewHolder {
 
 
         @InjectView(R.id.rcv_article_title)
         TextView rcvArticleTitle;
-        @InjectView(R.id.rcv_article_date)
-        TextView rcvArticleDate;
-        @InjectView(R.id.rcv_article_readtimes)
-        TextView rcvArticleReadtimes;
+        @InjectView(R.id.rcv_article_photo)
+        SimpleDraweeView rcvArticlePhoto;
+        @InjectView(R.id.rcv_click_time)
+        TextView rcvClickTime;
+        @InjectView(R.id.swipe_layout)
+        SwipeLayout swipeLayout;
+        @InjectView(R.id.cv_Delete)
+        CardView cvDelete;
 
         public HistoryViewHolder(View itemView) {
             super(itemView);

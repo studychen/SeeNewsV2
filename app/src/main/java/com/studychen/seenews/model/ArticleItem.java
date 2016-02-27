@@ -42,7 +42,7 @@ public class ArticleItem extends SimpleArticleItem {
 
     @Override
     public String toString() {
-        return "ArticleItem [id=" + getId() + ",\n imageUrls=" + Arrays.toString(getImageUrls()) + ",\n title="
+        return "ArticleItem [aid=" + getId() + ",\n imageUrls=" + Arrays.toString(getImageUrls()) + ",\n title="
                 + getTitle() + ",\n publishDate=" + getPublishDate() + ",\n source=" + source + ",\n readTimes="
                 + getReadTimes() + ",\n body=" + body + "]";
     }

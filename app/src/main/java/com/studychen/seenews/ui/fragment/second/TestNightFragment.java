@@ -47,7 +47,7 @@ public class TestNightFragment extends Fragment implements View.OnClickListener 
     AppBarLayout appBarLayout;
     @InjectView(R.id.webView)
     WebView webView;
-//    @InjectView(R.id.nsv_content)
+//    @InjectView(R.aid.nsv_content)
 //    NestedScrollView nsvContent;
     @InjectView(R.id.fab)
     FloatingActionButton fab;
@@ -96,7 +96,7 @@ public class TestNightFragment extends Fragment implements View.OnClickListener 
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setDefaultFontSize(18);
-        String data = "<div id=\"article_content\"><p>\n" +
+        String data = "<div aid=\"article_content\"><p>\n" +
                 "\t<strong>西电新闻网讯</strong> 2016年1月8日上午，在北京隆重举行国家科学技术奖励大会。党和国家领导人习近平、李克强、刘云山、张高丽出席大会并为获奖代表颁奖。李克强代表党中央、国务院在大会上讲话。西电刘宏伟教授、马晓华教授等作为获奖代表受到习近平等党和国家领导人亲切会见。\n" +
                 "</p>\n" +
                 "<p style=\"text-align:center;\">\n" +

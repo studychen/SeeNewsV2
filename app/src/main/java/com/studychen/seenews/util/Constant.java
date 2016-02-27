@@ -8,6 +8,7 @@ public class Constant {
     public static final String BUCKET_HOST_NAME = "http://7xq7ik.com1.z0.glb.clouddn.com/";
     //随机图片
     public static final String RANDOM_IMAGE = "http://7xr4g8.com1.z0.glb.clouddn.com/";
+
     public static final int COUNT_IMAGE = 965;
 
     //轮播图片的数目

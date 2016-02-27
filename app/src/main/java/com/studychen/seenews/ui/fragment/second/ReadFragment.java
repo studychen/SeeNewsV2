@@ -28,7 +28,7 @@ import butterknife.InjectView;
  *
  */
 public class ReadFragment extends Fragment {
-    public static final String ARTICLE_BASE_URL = "http://seenews.applinzi.com/articleWithSql?action=query&id=";
+    public static final String ARTICLE_BASE_URL = "http://seenews.applinzi.com/articleWithSql?action=query&aid=";
     private static final String SALE_PARAM = "param";
     private static final String SINA_ERROR_INFO = "您所访问的网站发生故障";
     @InjectView(R.id.rcv_article_title)

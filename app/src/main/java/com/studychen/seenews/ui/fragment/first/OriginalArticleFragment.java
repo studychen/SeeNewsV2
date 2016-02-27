@@ -64,7 +64,7 @@ public class OriginalArticleFragment extends Fragment {
     RecyclerView mRecyclerView;
     @InjectView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    //存储的参数,是栏目的 id 不连续
+    //存储的参数,是栏目的 aid 不连续
     private int mColumn;
     //获取 fragment 依赖的 Activity，方便使用 Context
     private Activity mActivity;
@@ -271,7 +271,7 @@ public class OriginalArticleFragment extends Fragment {
 
     /**
      * @param type   第几个栏目
-     * @param offset 偏移 id
+     * @param offset 偏移 aid
      * @return
      */
     public List<SimpleArticleItem> getArticleList(int type, int offset) {
@@ -371,7 +371,7 @@ public class OriginalArticleFragment extends Fragment {
         }
 
         /**
-         * @param params 偏移量 id
+         * @param params 偏移量 aid
          * @return
          */
         @Override

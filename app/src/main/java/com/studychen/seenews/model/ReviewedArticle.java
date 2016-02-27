@@ -1,4 +1,4 @@
-package com.studychen.seenews.db;
+package com.studychen.seenews.model;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -14,30 +14,34 @@ public class ReviewedArticle extends Model {
     @Column(name = "type")
     public int type;
 
-    @Column(name = "aid")
-    public int id;
+    @Column(name = "aid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    public int aid;
+
+
+    @Column(name = "photo_key")
+    public String photoKey;
 
     @Column(name = "title")
     public String title;
 
-    @Column(name = "date")
-    public String date;
+    //阅读时间
+    @Column(name = "click_time")
+    public long clickTime;
 
-    @Column(name = "read")
-    public int read;
 
     public ReviewedArticle() {
         super();
     }
 
+
     @Override
     public String toString() {
         return "ReviewedArticle{" +
                 "type=" + type +
-                ", id=" + id +
+                ", aid=" + aid +
+                ", photoKey='" + photoKey + '\'' +
                 ", title='" + title + '\'' +
-                ", date='" + date + '\'' +
-                ", read=" + read +
+                ", clickTime=" + clickTime +
                 '}';
     }
 }

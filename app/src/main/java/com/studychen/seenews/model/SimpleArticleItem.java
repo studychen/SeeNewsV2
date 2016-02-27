@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * listview 用到的简单实体类
- * 只包括 id，标题，发布日期，阅读次数
+ * 只包括 aid，标题，发布日期，阅读次数
  * 没有新闻主体内容等
  *
  * @author tomchen
@@ -65,7 +65,7 @@ public class SimpleArticleItem {
     public String toString() {
         return "SimpleArticleItem{" +
                 "type=" + type +
-                ", id=" + id +
+                ", aid=" + id +
                 ", imageUrls=" + Arrays.toString(imageUrls) +
                 ", title='" + title + '\'' +
                 ", publishDate='" + publishDate + '\'' +

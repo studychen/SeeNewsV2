@@ -22,13 +22,13 @@
     <!--android:layout_height="200dp">-->
 
     <!--<android.support.v4.view.ViewPager-->
-    <!--android:id="@+id/vp_hottest"-->
+    <!--android:aid="@+aid/vp_hottest"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
     <!--android:background="?attr/colorPrimary" />-->
 
     <!--<LinearLayout-->
-    <!--android:id="@+id/ll_hottest_indicator"-->
+    <!--android:aid="@+aid/ll_hottest_indicator"-->
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="20dp"-->
     <!--android:layout_gravity="bottom|right"-->

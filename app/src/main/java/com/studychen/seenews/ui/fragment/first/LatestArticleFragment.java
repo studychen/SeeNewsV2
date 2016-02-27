@@ -60,14 +60,14 @@ public class LatestArticleFragment extends Fragment {
     //latest的column是0
     private static final int mColumn = 0;
     //    //轮播的最热新闻图片
-//    @InjectView(R.id.vp_hottest)
+//    @InjectView(R.aid.vp_hottest)
 //    ViewPager vpHottest;
 //    //轮播图片下面的小圆点
-//    @InjectView(R.id.ll_hottest_indicator)
+//    @InjectView(R.aid.ll_hottest_indicator)
 //    LinearLayout llHottestIndicator;
 //
 //    //学院广播信息
-//    @InjectView(R.id.tv_college_broadcast)
+//    @InjectView(R.aid.tv_college_broadcast)
 //    TextView tvCollegeBroadcast;
     //新闻列表
 
@@ -237,7 +237,7 @@ public class LatestArticleFragment extends Fragment {
         try {
             Response responses = client.newCall(request).execute();
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, jsonData);
+            Log.i(Constant.LOG, "服务器返回的jsonData数据：" + jsonData);
 
 
             // 新浪云网站故障，资源耗尽
@@ -246,12 +246,11 @@ public class LatestArticleFragment extends Fragment {
             } else {
                 Gson gson = new GsonBuilder().create();
 
-                Log.i(Constant.LOG, jsonData);
 
                 Type listType = new TypeToken<List<SimpleArticleItem>>() {
                 }.getType();
                 List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, articles + "");
+                Log.i(Constant.LOG, "根据json解析的新闻 " + articles);
                 return articles;
             }
         } catch (IOException e) {
@@ -408,7 +407,7 @@ public class LatestArticleFragment extends Fragment {
 
     /**
      * @param type   第几个栏目
-     * @param offset 偏移 id
+     * @param offset 偏移 aid
      * @return
      */
     public List<SimpleArticleItem> getArticleList(int type, int offset) {

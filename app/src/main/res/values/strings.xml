@@ -32,6 +32,9 @@
     <!-- list 到了最底部 没有新数据了-->
     <string name="list_no_data">没有新的内容了哦~</string>
 
+    <!-- list 到了最底部 没有新数据了-->
+    <string name="review_history">浏览历史</string>
+
 
     <!--首页搜索框-->
     <string name="action_search_title">选择搜索内容</string>

@@ -23,7 +23,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.studychen.seenews.R;
-import com.studychen.seenews.db.ReviewedArticle;
+import com.studychen.seenews.model.ReviewedArticle;
 import com.studychen.seenews.model.ArticleItem;
 import com.studychen.seenews.ui.fragment.first.LatestArticleFragment;
 import com.studychen.seenews.util.ApiUrl;
@@ -31,6 +31,8 @@ import com.studychen.seenews.util.Constant;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+
+import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -60,6 +62,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private int columnType;
     private int articleID;
+    private String photoKey;
     private String title;
     private String date;
     private int read;
@@ -78,7 +81,12 @@ public class DetailActivity extends AppCompatActivity {
         date = getIntent().getStringExtra(LatestArticleFragment.ARTICLE_DATE);
         read = getIntent().getIntExtra(LatestArticleFragment.ARTICLE_READ, 452);
 
-        new LatestArticleTask().execute(columnType, articleID);
+        detailTitle.setText(title);
+        detailDate.setText(date);
+        detailRead.setText(read + "浏览");
+
+
+        new LatestArticleTask().execute();
     }
 
 
@@ -116,7 +124,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
     /**
-     * 根据 type 和 id 获取新闻详情
+     * 根据 type 和 aid 获取新闻详情
      *
      * @param type
      * @param articleID
@@ -179,6 +187,21 @@ public class DetailActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * 处理文章的图片 多图和无图的
+     * 返回给浏览历史使用
+     * 为了简单，都只返回一张图片
+     *
+     * @param urls
+     * @return
+     */
+    private String dealImageUrls(int id, String[] urls) {
+        if (urls == null || urls.length == 0) {
+            return ApiUrl.randomImageUrl(id);
+        } else {
+            return Constant.BUCKET_HOST_NAME + urls[0];
+        }
+    }
 
     //String 是输入参数
     class LatestArticleTask extends AsyncTask<Integer, Void, ArticleItem> {
@@ -186,14 +209,7 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         protected ArticleItem doInBackground(Integer... params) {
-            ReviewedArticle articleHistory = new ReviewedArticle();
-            articleHistory.type = params[0];
-            articleHistory.id = params[1];
-            articleHistory.title = title;
-            articleHistory.date = date;
-            articleHistory.read = read;
-            articleHistory.save();
-            return getArticleDetail(params[0], params[1]);
+            return getArticleDetail(columnType, articleID);
         }
 
         /**
@@ -204,10 +220,19 @@ public class DetailActivity extends AppCompatActivity {
         protected void onPostExecute(ArticleItem simpleArticleItem) {
             super.onPostExecute(simpleArticleItem);
 
-            detailTitle.setText(simpleArticleItem.getTitle());
-            detailDate.setText(simpleArticleItem.getPublishDate());
             detailSource.setText("来源：" + simpleArticleItem.getSource());
-            detailRead.setText(simpleArticleItem.getReadTimes() + "浏览");
+
+
+            ReviewedArticle articleHistory = new ReviewedArticle();
+
+            articleHistory.aid = articleID;
+            articleHistory.type = columnType;
+            articleHistory.photoKey = dealImageUrls(articleID, simpleArticleItem.getImageUrls());
+            articleHistory.title = title;
+            articleHistory.clickTime = System.currentTimeMillis();
+
+            Log.i(Constant.LOG, "得到的详情时间" + new Date(articleHistory.clickTime));
+            articleHistory.save();
 
             collapsingToolbar.setTitle(simpleArticleItem.getTitle());
 
