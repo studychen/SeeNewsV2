@@ -4,7 +4,7 @@
 
 
 ## 效果图
-<img src="/studychen/SeeNewsV2/blob/master/screenshots/refresh_endless_list.gif" alt="blog.csdn.net/never_cxb" title="screenshot" width="270" height="486" /> <br>
+<img src="/screenshots/refresh_endless_list.gif" alt="blog.csdn.net/never_cxb" title="screenshot" width="270" height="486" /> <br>
 
 <img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
 <img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_refresh.png" width="280" height="300" alt="http://blog.csdn.net/never_cxb" title=""><br>
