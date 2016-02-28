@@ -9,8 +9,8 @@
 <img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
 <img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_refresh.png" width="280" height="300" alt="http://blog.csdn.net/never_cxb" title=""><br>
 
-<img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_slide_remove.png" width="280" height="400" alt="http://blog.csdn.net/never_cxb" title="">
-<img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_loadmore.png" width="280" height="400" alt="http://blog.csdn.net/never_cxb" title="">
+<img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_slide_remove.png" width="270" height="486" alt="http://blog.csdn.net/never_cxb" title="">
+<img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_loadmore.png" width="270" height="486" alt="http://blog.csdn.net/never_cxb" title="">
 
 
 ## 数据来源API接口 ##
@@ -31,12 +31,16 @@
     },
 	......
     {
-        "id": 7934,
-        "imageUrls": [],
-        "title": "西安电子科技大学关于2016年部分节假日及寒假放假时间安排的通知",
-        "publishDate": "2016-01-16",
-        "readTimes": 1380,
-        "summary": "现将我校2016年元旦、清明节、劳动节、端午节及寒假放假时间安排通知如下, 30 （四）学校总值班室电话 电话, （二）教职工放假时间 2016年1月26日-2月25日放假。"
+        "id": 7948,
+        "imageUrls": [
+            "6a96b96982189e1fcb439b944cea0ce4",
+            "48c119220b4d3df451dd03cb1f70b3ef",
+            "27a911d81f7b13eeaf3ad49206c5f3d4"
+        ],
+        "title": "救助郭燕-电院2000级校友，参与互联网众筹，通过网络传递爱心！",
+        "publishDate": "2016-02-02",
+        "readTimes": 410,
+        "summary": "西电小喇叭、西电青年、西电学工等等转发帮助郭燕同学, 我替姐姐感谢大家, ---西电导航编辑注） 感谢我的同学。"
     }
 ]
 ```
