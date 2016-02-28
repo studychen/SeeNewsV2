@@ -4,11 +4,57 @@
 
 
 ## 效果图
+<img src="http://7xqo2w.com1.z0.glb.clouddn.com/show_app_demo.gif" alt="blog.csdn.net/never_cxb" title="screenshot" width="270" height="486" /> <br>
+
 <img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
 <img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_refresh.png" width="280" height="300" alt="http://blog.csdn.net/never_cxb" title=""><br>
 
 <img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_slide_remove.png" width="280" height="400" alt="http://blog.csdn.net/never_cxb" title="">
 <img src="http://7xqo2w.com1.z0.glb.clouddn.com/recyclerview_loadmore.png" width="280" height="400" alt="http://blog.csdn.net/never_cxb" title="">
+
+
+## 数据来源API接口 ##
+
+基于Jsoup爬虫实现，托管于新浪云，图片存于七牛
+
+新闻 list 数据示例：
+
+```
+[
+    {
+        "id": 7937,
+        "imageUrls": [],
+        "title": "青岛鼎信通讯消防安全有限公司2016年招聘简章",
+        "publishDate": "2016-01-20",
+        "readTimes": 298,
+        "summary": "技术问鼎 服务铸信 产品理念, 公司位于青岛市核心区域市南区青岛软件园, 企业理念。"
+    },
+	......
+    {
+        "id": 7934,
+        "imageUrls": [],
+        "title": "西安电子科技大学关于2016年部分节假日及寒假放假时间安排的通知",
+        "publishDate": "2016-01-16",
+        "readTimes": 1380,
+        "summary": "现将我校2016年元旦、清明节、劳动节、端午节及寒假放假时间安排通知如下, 30 （四）学校总值班室电话 电话, （二）教职工放假时间 2016年1月26日-2月25日放假。"
+    }
+]
+```
+
+
+新闻详情Json数据示例：
+
+```
+{
+    "source": "SeeNews",
+    "body": "<div id=\"article_content\"><p>\n\t校内各有线电视用户：\n</p>\n<p>\n\t为确保全校教职工员度过一个愉快的假期，保障南、北校区有线电视信号的正常传送，按照学校对校内有线电视维护工作安排，现将寒假期间有线电视信号维护工作通知如下：..wbtreeid=1227&amp;wbnewsid=13892</a></div>",
+    "id": 7946,
+    "imageUrls": [],
+    "title": "关于寒假期间南、北校区有线电视信号维护工作的通知",
+    "publishDate": "2016-01-26",
+    "readTimes": 225
+}
+```
 
 
 ## 功能开发记录
