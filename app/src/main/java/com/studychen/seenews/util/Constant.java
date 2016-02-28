@@ -16,8 +16,7 @@ public class Constant {
 
     // 控制还剩几项新闻的时候加载更多
     public static final int VISIBLE_THRESHOLD = 3;
-
-    public static final String LOG = "PAGER_LOG";
+    public static final String LOGGER_TAG = "LoggerTag";
     public static final String SINA_ERROR_INFO = "您所访问的网站发生故障";
 
 

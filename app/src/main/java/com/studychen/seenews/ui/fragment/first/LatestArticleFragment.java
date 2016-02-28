@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.nispok.snackbar.Snackbar;
+import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -140,7 +141,7 @@ public class LatestArticleFragment extends Fragment {
         //最开始 ViewPager 没有数据
 //        setUpViewPager( null );
 
-        Log.i(Constant.LOG, "in onActivityCreated");
+        Logger.d("in onActivityCreated");
 
         mAdapter = new LatestArticleAdapter(mActivity, mArticleList);
 
@@ -163,15 +164,15 @@ public class LatestArticleFragment extends Fragment {
 
                 super.onScrolled(recyclerView, dx, dy);
 
-                Log.i(Constant.LOG, "in onScrolled(recyclerView, dx, dy);");
+                Logger.d("in onScrolled(recyclerView, dx, dy);");
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
                 totalItemCount = layoutManager.getItemCount();
-                Log.i(Constant.LOG, "totalItemCount: " + totalItemCount);
+                Logger.d("totalItemCount: " + totalItemCount);
 
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                Log.i(Constant.LOG, "lastVisibleItem: " + lastVisibleItem);
+                Logger.d("lastVisibleItem: " + lastVisibleItem);
 
                 if (lastVisibleItem != totalItemCount - 1) {
                     bottom = false;
@@ -237,7 +238,7 @@ public class LatestArticleFragment extends Fragment {
         try {
             Response responses = client.newCall(request).execute();
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, "服务器返回的jsonData数据：" + jsonData);
+            Logger.d("服务器返回的jsonData数据：" + jsonData);
 
 
             // 新浪云网站故障，资源耗尽
@@ -250,7 +251,7 @@ public class LatestArticleFragment extends Fragment {
                 Type listType = new TypeToken<List<SimpleArticleItem>>() {
                 }.getType();
                 List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, "根据json解析的新闻 " + articles);
+                Logger.d("根据json解析的新闻 " + articles);
                 return articles;
             }
         } catch (IOException e) {
@@ -371,7 +372,7 @@ public class LatestArticleFragment extends Fragment {
         String api = ApiUrl.moreThanUrl();
         String url = String.format(api, type, moreThan);
 
-        Log.i(Constant.LOG, "得到更多新闻 url " + url);
+        Logger.d("得到更多新闻 url " + url);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -383,7 +384,7 @@ public class LatestArticleFragment extends Fragment {
         try {
             Response responses = client.newCall(request).execute();
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, jsonData);
+            Logger.d(jsonData);
 
 
             // 新浪云网站故障，资源耗尽
@@ -401,7 +402,7 @@ public class LatestArticleFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Log.i(Constant.LOG, "JSON没获得数据");
+        Logger.d("JSON没获得数据");
         return new ArrayList<SimpleArticleItem>();
     }
 
@@ -424,7 +425,7 @@ public class LatestArticleFragment extends Fragment {
         try {
             Response responses = client.newCall(request).execute();
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, jsonData);
+            Logger.d(jsonData);
 
 
             // 新浪云网站故障，资源耗尽
@@ -433,19 +434,19 @@ public class LatestArticleFragment extends Fragment {
             } else {
                 Gson gson = new GsonBuilder().create();
 
-                Log.i(Constant.LOG, "json数据" + jsonData);
+                Logger.d("json数据" + jsonData);
 
                 Type listType = new TypeToken<List<SimpleArticleItem>>() {
                 }.getType();
                 List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, "json解析的Articles" + articles);
+                Logger.d("json解析的Articles" + articles);
                 return articles;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Log.i(Constant.LOG, "JSON没获得数据");
+        Logger.d("JSON没获得数据");
         return new ArrayList<SimpleArticleItem>();
     }
 
@@ -512,7 +513,7 @@ public class LatestArticleFragment extends Fragment {
                 // notifyItemInserted(int position)，这个方法是在第position位置
                 // 被插入了一条数据的时候可以使用这个方法刷新，
                 // 注意这个方法调用后会有插入的动画，这个动画可以使用默认的，也可以自己定义。
-                Log.i(Constant.LOG, "增加底部footer 圆形ProgressBar");
+                Logger.d("增加底部footer 圆形ProgressBar");
 
                 mAdapter.notifyItemInserted(mArticleList.size() - 1);
             }
@@ -520,7 +521,7 @@ public class LatestArticleFragment extends Fragment {
 
         @Override
         protected List<SimpleArticleItem> doInBackground(Integer... params) {
-            Log.i(Constant.LOG, "in doInBackground");
+            Logger.d("in doInBackground");
 
             List<SimpleArticleItem> data = new ArrayList<SimpleArticleItem>();
 
@@ -549,7 +550,7 @@ public class LatestArticleFragment extends Fragment {
                 //删除 footer
                 mArticleList.remove(mArticleList.size() - 1);
 
-                Log.i(Constant.LOG, "下拉增加数据 " + moreArticles);
+                Logger.d("下拉增加数据 " + moreArticles);
 
                 //只有到达最底部才加载
                 //防止上拉到了倒数两三个也加载

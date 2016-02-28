@@ -26,6 +26,7 @@
 
         <activity android:name=".ui.activity.menu.HistoryActivity"></activity>
 
+        <activity android:name=".ui.activity.menu.SettingActivity"></activity>
         <!--数据库 active android-->
         <meta-data
             android:name="AA_DB_NAME"

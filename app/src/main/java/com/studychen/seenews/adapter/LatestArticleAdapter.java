@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.studychen.seenews.R;
 import com.studychen.seenews.model.SimpleArticleItem;
@@ -96,7 +97,7 @@ public class LatestArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
                 vh = new ItemArticleViewHolder(view);
                 return vh;
             case TYPE_FOOTER:
-                Log.i(Constant.LOG, "in TYPE_FOOTER");
+                Logger.d("下拉刷新 底部类型 in TYPE_FOOTER");
                 view = mLayoutInflater.inflate(
                         R.layout.recyclerview_footer, parent, false);
                 vh = new FooterViewHolder(view);
@@ -345,7 +346,6 @@ public class LatestArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (articleList != null) {
             return articleList.size() + 1 - Constant.COUNT_ROTATION;
         } else {
-            Log.i(Constant.LOG, "OriginArticleAdapter getItemCount return 0");
             return 0;
         }
     }

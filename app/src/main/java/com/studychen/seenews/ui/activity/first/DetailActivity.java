@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -134,9 +135,7 @@ public class DetailActivity extends AppCompatActivity {
         String api = ApiUrl.articleUrl();
         String url = String.format(api, type, articleID);
 
-        Log.i(Constant.LOG, "新闻详情页面 url" + url);
-
-        Log.i(Constant.LOG, url);
+        Logger.d("新闻详情页面 url" + url);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -147,8 +146,11 @@ public class DetailActivity extends AppCompatActivity {
 
         try {
             Response responses = client.newCall(request).execute();
+
+
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, jsonData);
+
+            Logger.d("服务器返回：" + jsonData);
 
 
             // 新浪云网站故障，资源耗尽
@@ -157,12 +159,11 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 Gson gson = new GsonBuilder().create();
 
-                Log.i(Constant.LOG, jsonData);
+                Logger.json(jsonData);
 
                 Type listType = new TypeToken<ArticleItem>() {
                 }.getType();
                 ArticleItem article = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, article + "");
                 return article;
             }
         } catch (IOException e) {
@@ -231,7 +232,7 @@ public class DetailActivity extends AppCompatActivity {
             articleHistory.title = title;
             articleHistory.clickTime = System.currentTimeMillis();
 
-            Log.i(Constant.LOG, "得到的详情时间" + new Date(articleHistory.clickTime));
+            Logger.d("得到的详情时间" + new Date(articleHistory.clickTime));
             articleHistory.save();
 
             collapsingToolbar.setTitle(simpleArticleItem.getTitle());

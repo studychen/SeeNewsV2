@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.orhanobut.logger.Logger;
+import com.studychen.seenews.util.Constant;
 
 /**
  * 全局应用程序上下文
@@ -30,6 +32,8 @@ public class SeeNewsApp extends Application {
 
         //初始化ActiveAndroid 方便操作Sqlite
         ActiveAndroid.initialize(this);
+
+        Logger.init(Constant.LOGGER_TAG);
     }
 
     /**

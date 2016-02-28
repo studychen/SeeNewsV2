@@ -80,8 +80,6 @@ public class HistoryArticleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         HistoryViewHolder newHolder = (HistoryViewHolder) holder;
 
         newHolder.rcvArticlePhoto.setImageURI(Uri.parse(article.photoKey));
-        Log.i(Constant.LOG, "得到 标题" + article.title);
-        Log.i(Constant.LOG, "得到 setImageURI" + article.photoKey);
 
         newHolder.rcvArticleTitle.setText(article.title);
 

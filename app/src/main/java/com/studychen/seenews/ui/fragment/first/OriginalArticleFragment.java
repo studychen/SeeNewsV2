@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.nispok.snackbar.Snackbar;
+import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -87,7 +88,7 @@ public class OriginalArticleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         int mPosition = getArguments().getInt(POSITION);
         mColumn = ColumnType.getType(mPosition);
-        Log.i(Constant.LOG, "得到comuln " + mColumn);
+        Logger.d("得到comuln " + mColumn);
     }
 
     @Nullable
@@ -231,7 +232,7 @@ public class OriginalArticleFragment extends Fragment {
         String api = ApiUrl.moreThanUrl();
         String url = String.format(api, type, moreThan);
 
-        Log.i(Constant.LOG, "得到更多新闻 url " + url);
+        Logger.d("得到更多新闻 url " + url);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -243,8 +244,8 @@ public class OriginalArticleFragment extends Fragment {
         try {
             Response responses = client.newCall(request).execute();
             String jsonData = responses.body().string();
-            Log.i(Constant.LOG, jsonData);
 
+            Logger.d("json数据" + jsonData);
 
             // 新浪云网站故障，资源耗尽
             if (jsonData.contains(Constant.SINA_ERROR_INFO)) {
@@ -252,19 +253,16 @@ public class OriginalArticleFragment extends Fragment {
             } else {
                 Gson gson = new GsonBuilder().create();
 
-                Log.i(Constant.LOG, "json数据" + jsonData);
-
                 Type listType = new TypeToken<List<SimpleArticleItem>>() {
                 }.getType();
                 List<SimpleArticleItem> articles = gson.fromJson(jsonData, listType);
-                Log.i(Constant.LOG, "json解析的Articles" + articles);
                 return articles;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Log.i(Constant.LOG, "JSON没获得数据");
+        Logger.d("服务器url没获得数据");
         return new ArrayList<SimpleArticleItem>();
     }
 
@@ -277,7 +275,6 @@ public class OriginalArticleFragment extends Fragment {
     public List<SimpleArticleItem> getArticleList(int type, int offset) {
         String api = ApiUrl.columnUrl();
         String url = String.format(api, type, offset);
-        Log.i(LOG, url);
 
         OkHttpClient client = new OkHttpClient();
 

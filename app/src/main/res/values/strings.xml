@@ -43,4 +43,5 @@
         <item>日期</item>
     </string-array>
     <string name="search_positive_btn_main">OK</string>
+    <string name="title_activity_setting">设置</string>
 </resources>

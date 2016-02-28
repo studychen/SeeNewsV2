@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.studychen.seenews.R;
 import com.studychen.seenews.model.SimpleArticleItem;
@@ -77,7 +78,6 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
                 vh = new ItemArticleViewHolder(view);
                 return vh;
             case TYPE_FOOTER:
-                Log.i(Constant.LOG, "in TYPE_FOOTER");
                 view = mLayoutInflater.inflate(
                         R.layout.recyclerview_footer, parent, false);
                 vh = new FooterViewHolder(view);
@@ -106,7 +106,6 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
             ItemArticleViewHolder newHolder = (ItemArticleViewHolder) holder;
             newHolder.rcvArticleTitle.setText(article.getTitle());
             newHolder.rcvArticleDate.setText(article.getPublishDate());
-            Log.i(Constant.LOG, article + "");
             //当图片小于3张时候 选取第1张图片
             if (imageUrls.length > 0) {
                 newHolder.rcvArticlePhoto.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME
@@ -180,7 +179,6 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (articleList != null) {
             return articleList.size();
         } else {
-            Log.i(Constant.LOG, "OriginArticleAdapter getItemCount return 0");
             return 0;
         }
     }

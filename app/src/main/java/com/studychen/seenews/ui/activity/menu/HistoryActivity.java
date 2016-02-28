@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.orhanobut.logger.Logger;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.studychen.seenews.BaseActivity;
 import com.studychen.seenews.R;
@@ -30,11 +31,9 @@ import butterknife.InjectView;
 
 public class HistoryActivity extends BaseActivity {
 
-    private static final String LOG_FILTER = "HistoryActivity";
-
     @InjectView(R.id.rcv_article_history)
     RecyclerView mRecyclerView;
-    @InjectView(R.id.toolbar_sale_store_detail)
+    @InjectView(R.id.toolbar_history)
     Toolbar mToolbar;
     @InjectView(R.id.progress_wheel)
     ProgressWheel progressWheel;
@@ -80,42 +79,42 @@ public class HistoryActivity extends BaseActivity {
 
 
         new ReviewedArticleTask().execute(-1);
-        Log.i(LOG_FILTER, "in HistoryActivity onCreate");
+        Logger.d("in HistoryActivity onCreate");
     }
 
     @Override
     protected void onRestart() {
-        Log.i(LOG_FILTER, "in HistoryActivity onRestart");
+        Logger.d("in HistoryActivity onRestart");
         super.onRestart();
     }
 
     @Override
     protected void onStart() {
-        Log.i(LOG_FILTER, "in HistoryActivity onStart");
+        Logger.d("in HistoryActivity onStart");
         super.onStart();
     }
 
     @Override
     protected void onResume() {
-        Log.i(LOG_FILTER, "in HistoryActivity onResume");
+        Logger.d("in HistoryActivity onResume");
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.i(LOG_FILTER, "in HistoryActivity onPause");
+        Logger.d("in HistoryActivity onPause");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.i(LOG_FILTER, "in HistoryActivity onStop");
+        Logger.d("in HistoryActivity onStop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.i(LOG_FILTER, "in HistoryActivity onDestroy");
+        Logger.d("in HistoryActivity onDestroy");
         super.onDestroy();
         ButterKnife.reset(this);
     }
@@ -170,7 +169,7 @@ public class HistoryActivity extends BaseActivity {
 
         @Override
         protected List<ReviewedArticle> doInBackground(Integer... params) {
-            Log.i(Constant.LOG, "in doInBackground 得到历史新闻" + getAll());
+            Logger.d("in doInBackground 得到历史新闻" + getAll());
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -186,8 +185,6 @@ public class HistoryActivity extends BaseActivity {
             mRecyclerView.setVisibility(View.VISIBLE);
 
             mArticleList.addAll(moreArticles);
-
-            Log.i(Constant.LOG, "in doInBackground 得到历史新闻" + mArticleList);
 
             mAdapter.notifyDataSetChanged();
         }

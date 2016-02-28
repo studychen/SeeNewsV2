@@ -19,7 +19,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.orhanobut.logger.Logger;
 import com.studychen.seenews.ui.activity.menu.HistoryActivity;
+import com.studychen.seenews.ui.activity.menu.SettingActivity;
 import com.studychen.seenews.util.NightModeHelper;
 import com.studychen.seenews.util.PrefUtils;
 import com.studychen.seenews.ui.fragment.first.ArticleFragmentContainer;
@@ -118,8 +120,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             radioButton.performClick();
         }
-
-        Log.i(Log_FILTER, "in main onCreate");
+        Logger.d("in main onCreate");
 
         initToolbar();
     }
@@ -224,8 +225,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(savedTab, mainRadios.getCheckedRadioButtonId());
         RadioButton radioButton = (RadioButton) findViewById(mainRadios.getCheckedRadioButtonId());
-
-        Log.i(Log_FILTER, "in main onSaveInstanceState");
         //删除下面这行，不然容易发生重影
 //        super.onSaveInstanceState(outState);
     }
@@ -282,6 +281,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (menuItem.getItemId()) {
             case R.id.nav_review:
                 return prepareIntent(HistoryActivity.class);
+            case R.id.nav_setting:
+                return prepareIntent(SettingActivity.class);
+
+            case R.id.nav_home:
+                MainActivity.this.recreate();//重新创建当前Activity实例
+                return true;
             default:
                 return true;
         }

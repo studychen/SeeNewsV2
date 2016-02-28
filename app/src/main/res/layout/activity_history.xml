@@ -9,7 +9,7 @@
 
     <!--Toolbar-->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_sale_store_detail"
+        android:id="@+id/toolbar_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

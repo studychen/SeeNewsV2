@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--最新栏目的新闻-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout="@layout/preference_item"
+    android:title="@string/title_activity_setting">
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="基本设置">
+
+        <CheckBoxPreference
+            android:layout="@layout/preference_item"
+            android:summary="仅在Wi-Fi环境下才自动加载图片"
+            android:title="省流量模式"
+            android:widgetLayout="@layout/switch_layout" />
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="删除已缓存的文章内容及图片"
+            android:title="清空缓存" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="其他说明">
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="V 1.0"
+            android:title="当前版本" />
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="博客：http://blog.csdn.net/never_cxb"
+            android:title="TomChen" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

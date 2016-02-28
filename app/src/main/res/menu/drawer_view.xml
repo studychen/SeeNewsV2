@@ -4,9 +4,9 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_message"
+            android:id="@+id/nav_home"
             android:icon="@drawable/drawer_action_share"
-            android:title="消息中心" />
+            android:title="首页" />
         <item
             android:id="@+id/nav_collection"
             android:icon="@drawable/drawer_action_collection"
@@ -28,6 +28,6 @@
             android:title="分享" />
         <item
             android:id="@+id/nav_setting"
-            android:title="夜间模式" />
+            android:title="设置" />
     </group>
 </menu>
