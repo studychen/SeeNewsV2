@@ -7,8 +7,14 @@
 <img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
 
 ## 功能开发记录
+### V 0.7
+- 历史记录list显示（按照阅读时间排序）
+- 修复使用ActiveAndroid，Sqlite某个字段id unique的问题
+- 当历史记录中某条新闻再次阅读时候，要把阅读时间更新
+- 自己实现长按删除，从Sqlite中删除
+- 利用开源库实现，侧滑删除Recyclerview某一项
 
-### V 0.5
+### V 0.6
 - 修复轮播图片小圆点重复问题<br> 
   当 RecyclerView 的 Item 超出屏幕后，会重新执行onBindViewHolder
 - 完成新闻详情页面xml和Activity
@@ -55,6 +61,7 @@
  - 自动摘要 [HanLP](https://github.com/hankcs/HanLP)
  - Sqlite 轻量级ORM [ActiveAndroid](https://github.com/pardom/ActiveAndroid)
  - 访问http请求 [okhttp](https://github.com/square/okhttp)
+ - Pretty日志输出 [logger](https://github.com/orhanobut/logger)
 
 ## 借鉴的 APP
 
