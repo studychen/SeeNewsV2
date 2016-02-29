@@ -66,6 +66,7 @@
 - 省流量模式，移动网络点击加载图片
 - 把CheckBoxPreference改为SwitchCompat
 - 修复官方的PreferenceScreen设置值无法传递的问题
+- 完成集成极光推送demo效果
 
 
 ### V 0.7
