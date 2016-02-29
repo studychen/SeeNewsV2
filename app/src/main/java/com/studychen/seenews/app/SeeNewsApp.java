@@ -8,6 +8,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 import com.studychen.seenews.util.Constant;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * 全局应用程序上下文
  * 方便 Preference 或 Sqlite 获取 Context
@@ -34,6 +36,9 @@ public class SeeNewsApp extends Application {
         ActiveAndroid.initialize(this);
 
         Logger.init(Constant.LOGGER_TAG);
+
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);            // 初始化 JPush
     }
 
     /**

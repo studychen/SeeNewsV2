@@ -164,15 +164,12 @@ public class LatestArticleFragment extends Fragment {
 
                 super.onScrolled(recyclerView, dx, dy);
 
-                Logger.d("in onScrolled(recyclerView, dx, dy);");
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
                 totalItemCount = layoutManager.getItemCount();
-                Logger.d("totalItemCount: " + totalItemCount);
 
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                Logger.d("lastVisibleItem: " + lastVisibleItem);
 
                 if (lastVisibleItem != totalItemCount - 1) {
                     bottom = false;
@@ -214,7 +211,7 @@ public class LatestArticleFragment extends Fragment {
                 new MoreArticleTask().execute(mAdapter.getTopOriginArticleId());
             }
         });
-//        swipeRefreshLayout.setRefreshing(true);
+//        mSwipeRefreshLayout.setRefreshing(true);
 //        new LatestArticleTask().execute(-1);
     }
 

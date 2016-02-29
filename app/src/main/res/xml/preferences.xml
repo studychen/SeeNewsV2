@@ -8,11 +8,18 @@
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
         android:title="基本设置">
-
         <CheckBoxPreference
+            android:key="@string/save_net_mode"
             android:layout="@layout/preference_item"
             android:summary="仅在Wi-Fi环境下才自动加载图片"
             android:title="省流量模式"
+            android:widgetLayout="@layout/switch_layout" />
+
+        <CheckBoxPreference
+            android:key="@string/save_net_mode"
+            android:layout="@layout/preference_item"
+            android:summary="向客户端推送热点新闻"
+            android:title="接收推送通知"
             android:widgetLayout="@layout/switch_layout" />
         <Preference
             android:layout="@layout/preference_item"

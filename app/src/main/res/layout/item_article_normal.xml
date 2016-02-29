@@ -22,10 +22,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <com.studychen.seenews.widget.SmartSimpleDraweeView
                 android:id="@+id/rcv_article_photo"
                 android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_height="90dp"
                 fresco:actualImageScaleType="focusCrop" />
 
 
@@ -41,7 +41,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
                     android:gravity="left"
+                    android:maxLines="2"
                     android:text="关于举办《经典音乐作品欣赏与人文审美》讲座的通知"
                     android:textSize="@dimen/list_title_size" />
                 <!-- 新闻 发布时间 来源 阅读次数-->

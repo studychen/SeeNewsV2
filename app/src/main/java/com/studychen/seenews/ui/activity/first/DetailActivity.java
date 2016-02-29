@@ -1,5 +1,6 @@
 package com.studychen.seenews.ui.activity.first;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.studychen.seenews.R;
+import com.studychen.seenews.Receiver.JpushReceiver;
 import com.studychen.seenews.model.ReviewedArticle;
 import com.studychen.seenews.model.ArticleItem;
 import com.studychen.seenews.ui.fragment.first.LatestArticleFragment;
@@ -37,6 +39,7 @@ import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by tomchen on 2/23/16.
@@ -76,11 +79,38 @@ public class DetailActivity extends AppCompatActivity {
 
         initToolbar();
 
-        columnType = getIntent().getIntExtra(LatestArticleFragment.COLUMN_TYPE, 0);
-        articleID = getIntent().getIntExtra(LatestArticleFragment.ARTICLE_ID, 7948);
-        title = getIntent().getStringExtra(LatestArticleFragment.ARTICLE_TITLE);
-        date = getIntent().getStringExtra(LatestArticleFragment.ARTICLE_DATE);
-        read = getIntent().getIntExtra(LatestArticleFragment.ARTICLE_READ, 452);
+        Intent intent = getIntent();
+        boolean isFromJpush = intent.getBooleanExtra(JpushReceiver.IS_FROM_JPUSH, false);
+
+        if (isFromJpush) {
+            Bundle bundle = getIntent().getExtras();
+            //从通知栏的推送跳转过来
+            title = bundle.getString(JPushInterface.EXTRA_ALERT);
+
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+
+            Logger.d("获得的extras" + extras);
+            Gson gson = new GsonBuilder().create();
+
+            ArticleItem article = gson.fromJson(extras, ArticleItem.class);
+
+            Logger.d("获得的article" + article);
+
+            columnType = article.getType();
+            articleID = article.getId();
+            date = article.getPublishDate();
+            read = article.getReadTimes();
+
+
+        } else {
+            //从列表跳转过来
+            columnType = intent.getIntExtra(LatestArticleFragment.COLUMN_TYPE, 0);
+            articleID = intent.getIntExtra(LatestArticleFragment.ARTICLE_ID, 7948);
+            title = intent.getStringExtra(LatestArticleFragment.ARTICLE_TITLE);
+            date = intent.getStringExtra(LatestArticleFragment.ARTICLE_DATE);
+            read = intent.getIntExtra(LatestArticleFragment.ARTICLE_READ, 452);
+
+        }
 
         detailTitle.setText(title);
         detailDate.setText(date);

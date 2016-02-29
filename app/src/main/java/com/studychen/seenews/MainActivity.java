@@ -32,6 +32,7 @@ import com.studychen.seenews.ui.fragment.third.ArticleNewsFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
+import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -106,7 +107,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ButterKnife.inject(this);
         navView.setNavigationItemSelectedListener(this);
 
-
         //onSaveInstanceState会保存已点击 tab 的 aid
         if (savedInstanceState == null) {
             //默认将第一个RadioButton设为选中
@@ -120,7 +120,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             radioButton.performClick();
         }
-        Logger.d("in main onCreate");
 
         initToolbar();
     }
@@ -245,12 +244,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onResume() {
         Log.i(Log_FILTER, "in main onResume");
         super.onResume();
+        JPushInterface.onResume(this);
     }
 
     @Override
     protected void onPause() {
         Log.i(Log_FILTER, "in main onPause");
         super.onPause();
+        JPushInterface.onPause(this);
     }
 
     @Override

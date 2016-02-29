@@ -12,6 +12,11 @@ android {
         versionName "1.0"
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
     buildTypes {
         debug {
@@ -30,13 +35,19 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+
+
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'com.android.support:cardview-v7:22.2.1'
+
+    //视图注入
+    compile files('libs/jpush-android-2.0.6.jar')
+
     //视图注入
     compile files('libs/butterknife-6.1.0.jar')
     //图片缓存
-    compile 'com.facebook.fresco:fresco:0.5.2'
+    compile 'com.facebook.fresco:fresco:0.9.0+'
     //StatusBar
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     //MD

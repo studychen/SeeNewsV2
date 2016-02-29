@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class SimpleArticleItem {
 
     // type 是数字 1表示新闻通知 2本科教学 见 ColumnType
-    int type;
+    private int type;
     private int id;
     private String[] imageUrls;
     // 图片资源不是必须的

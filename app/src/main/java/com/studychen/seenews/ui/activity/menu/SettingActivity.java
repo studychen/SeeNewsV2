@@ -15,7 +15,6 @@ import butterknife.InjectView;
 
 public class SettingActivity extends BaseActivity {
 
-    private static final String LOG_FILTER = "SettingActivity";
     @InjectView(R.id.toolbar_preference)
     Toolbar mToolbar;
 

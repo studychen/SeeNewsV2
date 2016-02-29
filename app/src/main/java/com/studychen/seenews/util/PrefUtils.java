@@ -15,6 +15,9 @@ public class PrefUtils {
     //日间或者夜间模式
     private static final String PRE_THEME_MODE = "dark_mode";
 
+    //省流量模式 这儿和R.string.save_net_mode相同
+    private static final String PRE_SAVE_NET_MODE = "save_net_mode";
+
     private static final String PRE_NAME = "com.studychen.seenews";
 
     private static SharedPreferences getSharedPreferences() {
@@ -34,6 +37,24 @@ public class PrefUtils {
     public static void setDarkMode(boolean isDarkMode) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putBoolean(PRE_THEME_MODE, isDarkMode);
+        editor.commit();
+    }
+
+    /**
+     * 省流量模式
+     *
+     * @return
+     */
+    public static boolean isSaveNetMode() {
+        return getSharedPreferences().getBoolean(PRE_SAVE_NET_MODE, false);
+    }
+
+    /**
+     * @param isSaveNetMode true为省流量模式，不加载图片
+     */
+    public static void setSaveNetMode(boolean isSaveNetMode) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(PRE_SAVE_NET_MODE, isSaveNetMode);
         editor.commit();
     }
 

@@ -43,7 +43,7 @@
 
                 <!--actualImageScaleType=focusCrop 缩放使得人像在中间-->
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.studychen.seenews.widget.SmartSimpleDraweeView
                     android:id="@+id/article_pic1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     fresco:actualImageScaleType="focusCrop" />
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.studychen.seenews.widget.SmartSimpleDraweeView
                     android:id="@+id/article_pic2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -59,7 +59,7 @@
                     android:layout_weight="1"
                     fresco:actualImageScaleType="focusCrop" />
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.studychen.seenews.widget.SmartSimpleDraweeView
                     android:id="@+id/article_pic3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

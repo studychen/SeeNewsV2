@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,7 +26,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.studychen.seenews.R;
-import com.studychen.seenews.adapter.LatestArticleAdapter;
 import com.studychen.seenews.adapter.OriginArticleAdapter;
 import com.studychen.seenews.model.SimpleArticleItem;
 import com.studychen.seenews.ui.activity.first.DetailActivity;
@@ -59,12 +57,12 @@ public class OriginalArticleFragment extends Fragment {
     public static final String ARTICLE_READ = "read_times";
     public static final String COLUMN_TYPE = "type";
     private static final String POSITION = "column";
-    private static final String LOG = "PAGER_LOG";
+
     private static final String SINA_ERROR_INFO = "您所访问的网站发生故障";
     @InjectView(R.id.rcv_article_origin)
     RecyclerView mRecyclerView;
     @InjectView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     //存储的参数,是栏目的 aid 不连续
     private int mColumn;
     //获取 fragment 依赖的 Activity，方便使用 Context
@@ -78,7 +76,6 @@ public class OriginalArticleFragment extends Fragment {
         OriginalArticleFragment fragment = new OriginalArticleFragment();
         Bundle args = new Bundle();
         args.putInt(POSITION, param);
-        Log.i(LOG, "in newInstance put position " + param);
         fragment.setArguments(args);
         return fragment;
     }
@@ -88,7 +85,6 @@ public class OriginalArticleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         int mPosition = getArguments().getInt(POSITION);
         mColumn = ColumnType.getType(mPosition);
-        Logger.d("得到comuln " + mColumn);
     }
 
     @Nullable
@@ -100,7 +96,6 @@ public class OriginalArticleFragment extends Fragment {
         mActivity = getActivity();
         mHandler = new Handler();
         mArticleList = new ArrayList<SimpleArticleItem>();
-        Log.i(LOG, "in onCreateView");
         return view;
     }
 
@@ -108,7 +103,6 @@ public class OriginalArticleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Log.i(LOG, "in onActivityCreated");
 
         //让 RecyclerView 每一项的高度相同
 //        mRecyclerView.setHasFixedSize(true);
@@ -135,15 +129,12 @@ public class OriginalArticleFragment extends Fragment {
 
                 super.onScrolled(recyclerView, dx, dy);
 
-                Log.i(LOG, "in onScrolled(recyclerView, dx, dy);");
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
                 int totalItemCount = layoutManager.getItemCount();
-                Log.i(LOG, "totalItemCount: " + totalItemCount);
 
                 int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                Log.i(LOG, "lastVisibleItem: " + lastVisibleItem);
 
                 if (!loading && totalItemCount < (lastVisibleItem + Constant.VISIBLE_THRESHOLD)) {
                     new ArticleTask(mActivity).execute(mAdapter.getBottomArticleId());
@@ -167,18 +158,18 @@ public class OriginalArticleFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new MoreArticleTask().execute(mAdapter.getTopArticleId());
             }
         });
 
-        swipeRefreshLayout.post(new Runnable() {
+        mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                swipeRefreshLayout.setRefreshing(true);
+                mSwipeRefreshLayout.setRefreshing(true);
                 new MoreArticleTask().execute(mAdapter.getTopArticleId());
             }
         });
@@ -307,12 +298,12 @@ public class OriginalArticleFragment extends Fragment {
     }
 
     //Integer 是输入参数
-    // 得到比某个id大的新闻数组
+// 得到比某个id大的新闻数组
     class MoreArticleTask extends AsyncTask<Integer, Void, List<SimpleArticleItem>> {
         @Override
         protected List<SimpleArticleItem> doInBackground(Integer... params) {
             try {
-                Thread.sleep(1500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -324,8 +315,8 @@ public class OriginalArticleFragment extends Fragment {
         protected void onPostExecute(List<SimpleArticleItem> simpleArticleItems) {
             super.onPostExecute(simpleArticleItems);
 
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout.setRefreshing(false);
+            if (mSwipeRefreshLayout != null) {
+                mSwipeRefreshLayout.setRefreshing(false);
             }
             //没有新的数据，提示消息
             if (simpleArticleItems == null || simpleArticleItems.size() == 0) {
@@ -361,7 +352,7 @@ public class OriginalArticleFragment extends Fragment {
                 // notifyItemInserted(int position)，这个方法是在第position位置
                 // 被插入了一条数据的时候可以使用这个方法刷新，
                 // 注意这个方法调用后会有插入的动画，这个动画可以使用默认的，也可以自己定义。
-                Log.i(LOG, "in mArticleList.add(null)");
+                Logger.d("in mArticleList.add(null)");
 
                 mAdapter.notifyItemInserted(mArticleList.size() - 1);
             }

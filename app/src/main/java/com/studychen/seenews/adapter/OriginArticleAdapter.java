@@ -63,95 +63,94 @@ public class OriginArticleAdapter extends RecyclerView.Adapter<RecyclerView.View
      * @param viewType
      * @return
      */
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+@Override
+public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        RecyclerView.ViewHolder vh;
-        View view;
-        switch (viewType) {
+    RecyclerView.ViewHolder vh;
+    View view;
+    switch (viewType) {
+        //其他无法处理的情况使用viewholder_article_simple
+        default:
+        case TYPE_NORMAL:
+            view = mLayoutInflater.inflate(
+                    R.layout.item_article_normal, parent, false);
+            vh = new ItemArticleViewHolder(view);
+            return vh;
+        case TYPE_FOOTER:
+            view = mLayoutInflater.inflate(
+                    R.layout.recyclerview_footer, parent, false);
+            vh = new FooterViewHolder(view);
+            return vh;
+        case TYPE_MULTI_IMAGES:
+            view = mLayoutInflater.inflate(
+                    R.layout.item_article_multi_images, parent, false);
+            vh = new MultiImagesViewHolder(view);
+            return vh;
+    }
+}
 
-            //其他无法处理的情况使用viewholder_article_simple
-            default:
-            case TYPE_NORMAL:
-                view = mLayoutInflater.inflate(
-                        R.layout.item_article_normal, parent, false);
-                vh = new ItemArticleViewHolder(view);
-                return vh;
-            case TYPE_FOOTER:
-                view = mLayoutInflater.inflate(
-                        R.layout.recyclerview_footer, parent, false);
-                vh = new FooterViewHolder(view);
-                return vh;
-            case TYPE_MULTI_IMAGES:
-                view = mLayoutInflater.inflate(
-                        R.layout.item_article_multi_images, parent, false);
-                vh = new MultiImagesViewHolder(view);
-                return vh;
-        }
+@Override
+public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+
+    //这时候 article是 null，先把 footer 处理了
+    if (holder instanceof FooterViewHolder) {
+        ((FooterViewHolder) holder).rcvLoadMore.spin();
+        return;
     }
 
-    @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    SimpleArticleItem article = articleList.get(position);
+    String[] imageUrls = article.getImageUrls();
 
-        //这时候 article是 null，先把 footer 处理了
-        if (holder instanceof FooterViewHolder) {
-            ((FooterViewHolder) holder).rcvLoadMore.spin();
-            return;
-        }
-
-        SimpleArticleItem article = articleList.get(position);
-        String[] imageUrls = article.getImageUrls();
-
-        if (holder instanceof ItemArticleViewHolder) {
-            ItemArticleViewHolder newHolder = (ItemArticleViewHolder) holder;
-            newHolder.rcvArticleTitle.setText(article.getTitle());
-            newHolder.rcvArticleDate.setText(article.getPublishDate());
-            //当图片小于3张时候 选取第1张图片
-            if (imageUrls.length > 0) {
-                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME
-                        + imageUrls[0]));
-            } else {
-                newHolder.rcvArticlePhoto.setImageURI(Uri.parse(ApiUrl.randomImageUrl(article.getId())));
-            }
-            //注意这个阅读次数是 int 类型，需要转化为 String 类型
-            newHolder.rcvArticleReadtimes.setText("浏览: " + article.getReadTimes());
-
-            newHolder.rcvArticleSummary.setText(article.getSummary());
-            // 如果设置了回调，则设置点击事件
-            if (mOnItemClickLitener != null) {
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int pos = holder.getLayoutPosition();
-                        mOnItemClickLitener.onItemClick(pos);
-                    }
-                });
-            }
+    if (holder instanceof ItemArticleViewHolder) {
+        ItemArticleViewHolder newHolder = (ItemArticleViewHolder) holder;
+        newHolder.rcvArticleTitle.setText(article.getTitle());
+        newHolder.rcvArticleDate.setText(article.getPublishDate());
+        //当图片小于3张时候 选取第1张图片
+        if (imageUrls.length > 0) {
+            newHolder.rcvArticlePhoto.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME
+                    + imageUrls[0]));
         } else {
-            MultiImagesViewHolder newHolder = (MultiImagesViewHolder) holder;
-            newHolder.articleTitle.setText(article.getTitle());
-            newHolder.articlePic1.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[0]));
-            newHolder.articlePic2.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[1]));
-            newHolder.articlePic3.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[2]));
-            newHolder.countPics.setText("图片: " + imageUrls.length);
-            newHolder.countRead.setText("浏览: " + article.getReadTimes());
-
-            // 如果设置了回调，则设置点击事件
-            if (mOnItemClickLitener != null) {
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int pos = holder.getLayoutPosition();
-                        mOnItemClickLitener.onItemClick(pos);
-                    }
-                });
-            }
+            newHolder.rcvArticlePhoto.setImageURI(Uri.parse(ApiUrl.randomImageUrl(article.getId())));
         }
+        //注意这个阅读次数是 int 类型，需要转化为 String 类型
+        newHolder.rcvArticleReadtimes.setText("浏览: " + article.getReadTimes());
 
+        newHolder.rcvArticleSummary.setText(article.getSummary());
+        // 如果设置了回调，则设置点击事件
+        if (mOnItemClickLitener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(pos);
+                }
+            });
+        }
+    } else {
+        MultiImagesViewHolder newHolder = (MultiImagesViewHolder) holder;
+        newHolder.articleTitle.setText(article.getTitle());
+        newHolder.articlePic1.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[0]));
+        newHolder.articlePic2.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[1]));
+        newHolder.articlePic3.setImageURI(Uri.parse(Constant.BUCKET_HOST_NAME + imageUrls[2]));
+        newHolder.countPics.setText("图片: " + imageUrls.length);
+        newHolder.countRead.setText("浏览: " + article.getReadTimes());
+
+        // 如果设置了回调，则设置点击事件
+        if (mOnItemClickLitener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(pos);
+                }
+            });
+        }
     }
 
+}
 
-    /**
+
+/**
      * 传进来的 List 末尾增加一个 null
      * null 作为是上拉的 progressBar 的标记
      * http://android-pratap.blogspot.com/2015/06/endless-recyclerview-with-progress-bar.html

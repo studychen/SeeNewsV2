@@ -20,4 +20,5 @@ public class Constant {
     public static final String SINA_ERROR_INFO = "您所访问的网站发生故障";
 
 
+
 }

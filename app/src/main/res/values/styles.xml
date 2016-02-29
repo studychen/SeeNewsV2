@@ -15,6 +15,7 @@
         <item name="fabCircleColor">@color/fabCircleColor_light</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
         <item name="listBackground">@color/list_background</item>
+        <item name="colorControlActivated">@color/primary</item>
     </style>
 
 
@@ -39,6 +40,7 @@
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
         <!--listBackground list 列表展示的背景色 让白色item突出-->
         <item name="listBackground">@color/list_background_dark</item>
+        <item name="colorControlActivated">@color/colorPrimaryDarkTheme</item>
     </style>
 
     <!--主页tabs样式-->
@@ -76,5 +78,6 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">24sp</item>
     </style>
+
 
 </resources>
