@@ -1,19 +1,19 @@
 # SeeNewsV2
 
-## 新闻Android客户端 基于Material Design
+## News Android client based on Material Design
 
 
-## 效果图
+## renderings
 <img src="/screenshots/refresh_endless_list.gif" alt="blog.csdn.net/never_cxb" title="screenshot" width="270" height="486" /> <br>
 
 <img src="http://img.blog.csdn.net/20160117162640833" width="280" height="220" alt="http://blog.csdn.net/never_cxb" title="">
 
 
-## 数据来源API接口 ##
+## Data source API interface ##
 
-基于Jsoup爬虫实现，托管于新浪云，图片存于七牛
+Implemented based on Jsoup crawler, hosted on Sina Cloud, and images stored in Qiniu Cloud.
 
-新闻 list 数据示例：
+News list data example:
 
 ```
 [
@@ -42,7 +42,7 @@
 ```
 
 
-新闻详情Json数据示例：
+News details Json data example:
 
 ```
 {
@@ -57,71 +57,71 @@
 ```
 
 
-## 功能开发记录
+## Function development record
 ### V 0.7
-- 省流量模式，移动网络点击加载图片
-- 把CheckBoxPreference改为SwitchCompat
-- 修复官方的PreferenceScreen设置值无法传递的问题
-- 完成集成极光推送demo效果
+- Data saving mode, click on mobile network to load pictures
+- Change CheckBoxPreference to SwitchCompat
+- Fixed the problem that the official PreferenceScreen setting value cannot be passed
+- Completed integrated Aurora push demo effect
 
 
 ### V 0.7
-- 历史记录list显示（按照阅读时间排序）
-- 修复使用ActiveAndroid，Sqlite某个字段id unique的问题
-- 当历史记录中某条新闻再次阅读时候，要把阅读时间更新
-- 自己实现长按删除，从Sqlite中删除
-- 利用开源库实现，侧滑删除Recyclerview某一项
+- History list display (sorted by reading time)
+- Fix the problem of unique field id in Sqlite using ActiveAndroid
+- When a certain news in the history is read again, the reading time must be updated
+- Implement long press deletion yourself and delete from Sqlite
+- Implemented using open source libraries to slide and delete an item in Recyclerview
 
 ### V 0.6
-- 修复轮播图片小圆点重复问题<br> 
-  当 RecyclerView 的 Item 超出屏幕后，会重新执行onBindViewHolder
-- 完成新闻详情页面xml和Activity
-- CollapsingToolbarLayout 实现图片和toolbar上拉隐藏
-- 解决webview内容过少，上滑失效的问题
+- Fixed the problem of repeated small dots in carousel images<br>
+   When the RecyclerView's Item goes beyond the screen, onBindViewHolder will be re-executed.
+- Complete the news details page xml and Activity
+- CollapsingToolbarLayout implements pull-up and hiding of pictures and toolbars
+- Solve the problem of too little webview content and failure to slide up
 
 ### V 0.5
-- 完善RecyclerView列表各个新闻的字体颜色
-- 利用自然语言工具包 完成新闻自动摘要
-- 多多Item布局实现，有多幅图片的新闻、无图片的分开展示
-- 基于七牛，获取随机优美图片给无图片新闻使用
+- Improve the font color of each news in the RecyclerView list
+- Use natural language toolkit to complete automatic summary of news
+- Duoduo Item layout is implemented, and news with multiple pictures and news without pictures are displayed separately.
+- Based on Qiniu, obtain random beautiful pictures for use in picture-free news
 
 ### V 0.4
-- 完善TabLayout，展示6个栏目
-- Endless RecyclerView 实现，上拉加载更多
-- Material Design 的圆形 Progress Bar
+- Improve TabLayout and display 6 columns
+- Endless RecyclerView implementation, pull up to load more
+- Material Design’s round Progress Bar
 
 ### V 0.3
-- 增加启动图标
-- 修改 ViewPage 作为 RecyclerView 的第一项
-- TabLayout + ViewPager 页卡滑动效果，展示本科、研究生等栏目的新闻
-- 修复部分设备 optionsMenu遮挡ToolBar的问题
+- Add startup icon
+- Modify ViewPage as the first item of RecyclerView
+- TabLayout + ViewPager page card sliding effect to display news from undergraduate, graduate and other columns
+- Fixed the issue where optionsMenu blocks ToolBar on some devices
 
 ### V 0.2
-- 上传图片到七牛
-- 新浪云实现 API 接口，数据缓存在 Mysql
-- 夜间模式 （切换不同 Theme）
-- 异步获取新闻 Json 数据 
+- Upload pictures to Qiniu
+- Sina Cloud implements API interface and data is cached in Mysql
+- Night mode (switch to different themes)
+- Asynchronously obtain news Json data
 
 ### V 0.1
-- DrawerLayout 实现抽屉菜单
-- Navigation 实现抽屉左边的导航
-- ToolBar 实现沉浸式布局
-- ViewPager 展示轮播图片（首尾循环，自动轮播）
-- RecyclerView + CardView 展示新闻列表
+- DrawerLayout implements drawer menu
+- Navigation implements navigation on the left side of the drawer
+- ToolBar implements immersive layout
+- ViewPager displays carousel images (first and last loop, automatic carousel)
+- RecyclerView + CardView displays news list
 
 
 ## 依赖的开源类库、工具
 
- - View注入框架，绑定控件和 OnClick 方法[butterknife](https://github.com/JakeWharton/butterknife)
- - facebook 的图片库，支持圆形、方形，各种缩放等[fresco](https://github.com/facebook/fresco)
- - 启动图片在线生成工具 [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
- - 圆形 ProgressBar [materialish-progress](https://github.com/pnikosis/materialish-progress)
- - 自动摘要 [HanLP](https://github.com/hankcs/HanLP)
- - Sqlite 轻量级ORM [ActiveAndroid](https://github.com/pardom/ActiveAndroid)
- - 访问http请求 [okhttp](https://github.com/square/okhttp)
- - Pretty日志输出 [logger](https://github.com/orhanobut/logger)
+- View injection framework, bound controls and OnClick method [butterknife](https://github.com/JakeWharton/butterknife)
+- Facebook's picture library, supporting circles, squares, various zooms, etc. [fresco](https://github.com/facebook/fresco)
+- Launch the online image generation tool [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+- Circular ProgressBar [materialish-progress](https://github.com/pnikosis/materialish-progress)
+- Automatic summary [HanLP](https://github.com/hankcs/HanLP)
+- Sqlite lightweight ORM [ActiveAndroid](https://github.com/pardom/ActiveAndroid)
+- Access http request [okhttp](https://github.com/square/okhttp)
+- Pretty log output [logger](https://github.com/orhanobut/logger)
 
-## 借鉴的 APP
+## APPs to learn from
 
  - [BuildingBlocks](https://github.com/tangqi92/BuildingBlocks)
  
