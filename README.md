@@ -18,25 +18,26 @@ News list data example:
 ```
 [
     {
-        "id": 7937,
-        "imageUrls": [],
-        "title": "青岛鼎信通讯消防安全有限公司2016年招聘简章",
-        "publishDate": "2016-01-20",
-        "readTimes": 298,
-        "summary": "技术问鼎 服务铸信 产品理念, 公司位于青岛市核心区域市南区青岛软件园, 企业理念。"
+        "id":7937,
+        "imageUrls":[
+
+        ],
+        "title":"Qingdao Dingxin Communications Fire Safety Co., Ltd. 2016 Recruitment Brochure",
+        "publishDate":"2016-01-20",
+        "readTimes":298,
+        "summary":"Technology strives for excellence, service creates trust, product philosophy, the company is located in Qingdao Software Park, Shinan District, the core area of Qingdao City, corporate philosophy."
     },
-	......
     {
-        "id": 7948,
-        "imageUrls": [
+        "id":7948,
+        "imageUrls":[
             "6a96b96982189e1fcb439b944cea0ce4",
             "48c119220b4d3df451dd03cb1f70b3ef",
             "27a911d81f7b13eeaf3ad49206c5f3d4"
         ],
-        "title": "救助郭燕-电院2000级校友，参与互联网众筹，通过网络传递爱心！",
-        "publishDate": "2016-02-02",
-        "readTimes": 410,
-        "summary": "西电小喇叭、西电青年、西电学工等等转发帮助郭燕同学, 我替姐姐感谢大家, ---西电导航编辑注） 感谢我的同学。"
+        "title":"Save Guo Yan, a 2000-level alumnus of the School of Electrical and Electronics Engineering, participate in Internet crowdfunding, and spread love through the Internet!",
+        "publishDate":"2016-02-02",
+        "readTimes":410,
+        "summary":"Xidian Small Speaker, Xidian Youth, Xidian Students and Workers, etc. forwarded to help classmate Guo Yan. I would like to thank everyone on behalf of my sister. ---Xidian Navigation Editor's Note) Thank you to my classmates."
     }
 ]
 ```
@@ -46,13 +47,13 @@ News details Json data example:
 
 ```
 {
-    "source": "SeeNews",
-    "body": "<div id=\"article_content\"><p>\n\t校内各有线电视用户：\n</p>\n<p>\n\t为确保全校教职工员度过一个愉快的假期，保障南、北校区有线电视信号的正常传送，按照学校对校内有线电视维护工作安排，现将寒假期间有线电视信号维护工作通知如下：..wbtreeid=1227&amp;wbnewsid=13892</a></div>",
-    "id": 7946,
-    "imageUrls": [],
-    "title": "关于寒假期间南、北校区有线电视信号维护工作的通知",
-    "publishDate": "2016-01-26",
-    "readTimes": 225
+     "source": "SeeNews",
+     "body": "<div id=\"article_content\"><p>\n\tCable TV users in the school:\n</p>\n<p>\n\tIn order to ensure the integrity of the school's faculty and staff Have a pleasant holiday and ensure the normal transmission of cable TV signals in the south and north campuses. According to the school’s arrangements for on-campus cable TV maintenance work, the cable TV signal maintenance work during the winter vacation is now notified as follows: ..wbtreeid=1227&amp;wbnewsid=13892< /a></div>",
+     "id": 7946,
+     "imageUrls": [],
+     "title": "Notice on cable TV signal maintenance work in the South and North Campuses during the winter vacation",
+     "publishDate": "2016-01-26",
+     "readTimes": 225
 }
 ```
 
@@ -110,7 +111,7 @@ News details Json data example:
 - RecyclerView + CardView displays news list
 
 
-## 依赖的开源类库、工具
+## Dependent open source libraries and tools
 
 - View injection framework, bound controls and OnClick method [butterknife](https://github.com/JakeWharton/butterknife)
 - Facebook's picture library, supporting circles, squares, various zooms, etc. [fresco](https://github.com/facebook/fresco)
